@@ -8,11 +8,14 @@ import Buefy from "buefy";
 import "buefy/dist/buefy.css";
 
 const gauthOption = {
-  clientId: process.env.CLIENT_ID,
-  scope: "profile email
+  clientId: process.env.VUE_APP_CLIENT_ID,
+  scope: "profile email"
 };
+console.log(process.env.VUE_APP_CLIENT_ID);
 
-Vue.use(Buefy);
+Vue.use(Buefy, {
+  defaultIconPack: "fa"
+});
 Vue.use(GAuth, gauthOption);
 Vue.config.productionTip = false;
 

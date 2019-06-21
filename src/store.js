@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import router from "./router";
 
 Vue.use(Vuex);
 
@@ -30,15 +31,22 @@ export default new Vuex.Store({
   },
   actions: {
     login({ commit }) {
-      Vue.prototype.$gAuth.signIn().then(user => {
-        console.log("user", user);
-        commit(LOGIN);
-      });
+      Vue.prototype.$gAuth
+        .signIn()
+        .then(() => {
+          commit(LOGIN);
+          router.push("/");
+        })
+        .catch(err => console.log(err));
     },
     logout({ commit }) {
-      Vue.prototype.$gAuth.signOut().then(() => {
-        commit(LOGOUT);
-      });
+      Vue.prototype.$gAuth
+        .signOut()
+        .then(() => {
+          commit(LOGOUT);
+          router.push("/login");
+        })
+        .catch(err => console.log(err));
     },
     initializeAuth({ commit }) {
       let isInit;
