@@ -1,14 +1,12 @@
 import Vue from "vue";
-import Vuex from "vuex";
-import router from "./router";
-
-Vue.use(Vuex);
+import router from "../router";
 
 const LOGIN = "LOGIN";
 const LOGOUT = "LOGOUT";
 const INITIALIZED = "INIT";
 
-export default new Vuex.Store({
+const authModule = {
+  namespaced: true,
   state: {
     isInit: false,
     isSignIn: false,
@@ -17,7 +15,7 @@ export default new Vuex.Store({
   mutations: {
     [LOGIN](state) {
       state.isSignIn = Vue.prototype.$gAuth.isAuthorized;
-      state.user = Vue.prototype.$gAuth.GoogleAuth;
+      state.user = Vue.prototype.$gAuth.GoogleAuth.currentUser.get();
     },
     [LOGOUT](state) {
       state.user = null;
@@ -26,7 +24,7 @@ export default new Vuex.Store({
     [INITIALIZED](state) {
       state.isInit = Vue.prototype.$gAuth.isInit;
       state.isSignIn = Vue.prototype.$gAuth.isAuthorized;
-      state.user = Vue.prototype.$gAuth.GoogleAuth;
+      state.user = Vue.prototype.$gAuth.GoogleAuth.currentUser.get();
     }
   },
   actions: {
@@ -70,4 +68,6 @@ export default new Vuex.Store({
       return state.isInit;
     }
   }
-});
+};
+
+export default authModule;

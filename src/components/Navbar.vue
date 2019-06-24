@@ -22,25 +22,46 @@
         </router-link>
       </div>
       <div class="navbar-end">
-        <div class="navbar-item">
+        <div class="navbar-item has-dropdown is-hoverable" v-if="isLoggedIn">
+          <a class="navbar-link">
+            Profile
+          </a>
+          <div class="navbar-dropdown is-right">
+            <div class="dropdown-content has-text-centered">
+              <div class="dropdown-item">
+                <figure class="image is-96x96 profile-picture">
+                  <img
+                    class="is-rounded"
+                    :src="imageUrl"
+                    alt="profile picture"
+                  />
+                </figure>
+                <div class="username has-text-weight-bold">{{ username }}</div>
+                <div class="email is-size-7">{{ email }}</div>
+              </div>
+              <div class="navbar-item buttons">
+                <b-button
+                  type="is-primary"
+                  @click="handleClickSignOut"
+                  v-if="isLoggedIn"
+                  :disabled="!isInit"
+                  outlined
+                >
+                  Sign Out
+                </b-button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="navbar-item" v-else>
           <div class="buttons">
             <b-button
               type="is-primary"
               @click="handleClickSignIn"
-              v-if="!isLoggedIn"
               :disabled="!isInit"
               outlined
             >
               Sign In
-            </b-button>
-            <b-button
-              type="is-primary"
-              @click="handleClickSignOut"
-              v-if="isLoggedIn"
-              :disabled="!isInit"
-              outlined
-            >
-              Sign Out
             </b-button>
           </div>
         </div>
@@ -62,15 +83,38 @@ export default {
   },
   methods: {
     handleClickSignIn() {
-      this.$store.dispatch("login").catch(() => (this.errors = "Login error"));
+      this.$store
+        .dispatch("auth/login")
+        .catch(() => (this.errors = "Login error"));
     },
     handleClickSignOut() {
       this.$store
-        .dispatch("logout")
+        .dispatch("auth/logout")
         .catch(() => (this.errors = "Logout error"));
+    }
+  },
+  computed: {
+    username() {
+      return this.$store.getters["auth/getUser"].getBasicProfile().getName();
+    },
+    email() {
+      return this.$store.getters["auth/getUser"].getBasicProfile().getEmail();
+    },
+    imageUrl() {
+      return this.$store.getters["auth/getUser"].getBasicProfile().getImageUrl();
     }
   }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.profile-picture {
+  margin: auto;
+}
+.profile-picture img {
+  max-height: 100%;
+}
+  .buttons {
+    justify-content: center;
+  }
+</style>

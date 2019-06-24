@@ -2,12 +2,12 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Login from "./views/Login.vue";
-import store from "./store";
+import store from "./store/store";
 
 Vue.use(Router);
 
 const shouldNotBeAuthenticated = (to, from, next) => {
-  if (!store.getters.getLoginState) {
+  if (!store.getters["auth/getLoginState"]) {
     next();
     return;
   }
@@ -15,7 +15,7 @@ const shouldNotBeAuthenticated = (to, from, next) => {
 };
 
 const shouldBeAuthenticated = (to, from, next) => {
-  if (store.getters.getLoginState) {
+  if (store.getters["auth/getLoginState"]) {
     next();
     return;
   }

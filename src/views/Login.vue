@@ -15,6 +15,7 @@
         >
           Sign In
         </b-button>
+        {{errors}}
       </div>
     </div>
   </section>
@@ -33,7 +34,9 @@ export default {
   },
   methods: {
     handleClickSignIn() {
-      this.$store.dispatch("login").catch(() => (this.errors = "Login error"));
+      this.$store
+        .dispatch(".auth/login")
+        .catch(() => (this.errors = "Login error"));
     }
   }
 };
