@@ -1,7 +1,7 @@
 export default {
   computed: {
     isLoggedIn() {
-      return this.$store.getters["auth/getInitState"];
+      return this.$store.getters["auth/getLoginState"];
     },
     isInit() {
       return this.$store.getters["auth/getInitState"];

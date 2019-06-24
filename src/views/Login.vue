@@ -35,7 +35,7 @@ export default {
   methods: {
     handleClickSignIn() {
       this.$store
-        .dispatch(".auth/login")
+        .dispatch("auth/login")
         .catch(() => (this.errors = "Login error"));
     }
   }

@@ -1,5 +1,6 @@
 import Vue from "vue";
 import router from "../router";
+import api from "../api";
 
 const LOGIN = "LOGIN";
 const LOGOUT = "LOGOUT";
@@ -16,15 +17,20 @@ const authModule = {
     [LOGIN](state) {
       state.isSignIn = Vue.prototype.$gAuth.isAuthorized;
       state.user = Vue.prototype.$gAuth.GoogleAuth.currentUser.get();
+      api.defaults.headers.common["Authorization"] =
+        "Bearer " + state.user.getAuthResponse().id_token;
     },
     [LOGOUT](state) {
       state.user = null;
-      state.isSignIn = Vue.prototype.$gAuth.isAuthorized;
+      state.isSignIn = false;
+      api.defaults.headers.common["Authorization"] = "";
     },
     [INITIALIZED](state) {
       state.isInit = Vue.prototype.$gAuth.isInit;
       state.isSignIn = Vue.prototype.$gAuth.isAuthorized;
       state.user = Vue.prototype.$gAuth.GoogleAuth.currentUser.get();
+      api.defaults.headers.common["Authorization"] =
+        "Bearer " + state.user.getAuthResponse().id_token;
     }
   },
   actions: {

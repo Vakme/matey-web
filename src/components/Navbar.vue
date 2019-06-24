@@ -43,7 +43,6 @@
                 <b-button
                   type="is-primary"
                   @click="handleClickSignOut"
-                  v-if="isLoggedIn"
                   :disabled="!isInit"
                   outlined
                 >

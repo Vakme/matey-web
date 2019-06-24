@@ -3,7 +3,9 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store/store";
 import GAuth from "vue-google-oauth2";
-
+import instance from "./api";
+import VueAxios from "vue-axios";
+import "vue-material-design-icons/styles.css";
 import Buefy from "buefy";
 import "buefy/dist/buefy.css";
 
@@ -17,6 +19,7 @@ Vue.use(Buefy, {
   defaultIconPack: "fa"
 });
 Vue.use(GAuth, gauthOption);
+Vue.use(VueAxios, instance);
 Vue.config.productionTip = false;
 
 new Vue({
