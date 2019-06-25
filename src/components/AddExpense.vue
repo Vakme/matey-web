@@ -19,6 +19,7 @@
         <b-field label="Select a date">
           <b-datepicker
             v-model="date"
+            :value="date"
             placeholder="Click to select..."
             icon="calendar-today"
           >
@@ -26,14 +27,17 @@
         </b-field>
 
         <b-field label="Value">
-          <b-numberinput step="0.01" v-model="value"> </b-numberinput>
+          <b-numberinput step="0.01" :value="value" v-model="value">
+          </b-numberinput>
         </b-field>
       </section>
       <footer class="modal-card-foot">
         <button class="button" type="button" @click="$parent.close()">
           Close
         </button>
-        <button class="button is-primary">Login</button>
+        <button class="button is-primary" type="submit" @click="addExpense">
+          Login
+        </button>
       </footer>
     </div>
   </form>
@@ -45,10 +49,32 @@ export default {
   data() {
     return {
       name: "",
-      date: "",
+      date: new Date(),
       value: 0,
       error: ""
     };
+  },
+  methods: {
+    addExpense(e) {
+      e.preventDefault();
+      let newExpense = {
+        name: this.name,
+        date: this.date,
+        value: this.value
+      };
+      this.$http
+        .post("funds", newExpense)
+        .then(response => {
+          console.log(response.data);
+          this.$emit("update", response.data.funds);
+          this.$toast.open({
+            type: "is-success",
+            message: "Expense added"
+          });
+          this.$parent.close();
+        })
+        .catch(e => (this.error = e));
+    }
   }
 };
 </script>

@@ -18,7 +18,6 @@
         :data="funds"
         :striped="true"
         :hoverable="true"
-        :loading="funds.length === 0"
         :mobile-cards="true"
       >
         <template slot-scope="props">
@@ -35,7 +34,12 @@
           </b-table-column>
 
           <b-table-column label="Remove" centered>
-            <trash-can @click.native="deleteExpense(props.row.name)" />
+            <span class="remove-expense">
+            <b-icon
+              icon="delete"
+              @click.native="onClickDelete(props.row.name)"
+            ></b-icon>
+              </span>
           </b-table-column>
         </template>
       </b-table>
@@ -63,20 +67,18 @@
     <b-modal :active.sync="summaryModal" has-modal-card>
       <modal-summary></modal-summary>
     </b-modal>
-    <b-modal :active.sync="addModal" has-modal-card>
-      <modal-add width="50vw" height="90vh"></modal-add>
+    <b-modal :active.sync="addModal">
+      <modal-add v-on:update="onUpdatedFunds"></modal-add>
     </b-modal>
   </section>
 </template>
 
 <script>
-import TrashCan from "vue-material-design-icons/TrashCan.vue";
 import Summary from "@/components/Summary";
 import AddExpense from "@/components/AddExpense";
 export default {
   name: "Expenses",
   components: {
-    "trash-can": TrashCan,
     "modal-summary": Summary,
     "modal-add": AddExpense
   },
@@ -99,14 +101,26 @@ export default {
         .then(response => (this.funds = response.data.funds))
         .catch(e => (this.error = e));
     },
+    onClickDelete(name) {
+      this.$dialog.confirm({
+        message: "Are you sure you want to delete expense " + name + "?",
+        onConfirm: () => this.deleteExpense(name)
+      });
+    },
     deleteExpense(name) {
       this.$http
         .delete("funds/" + name)
-        .then(() => this.getExpenses())
+        .then(() => {
+          this.getExpenses();
+          this.$toast.open({
+            type: "is-success",
+            message: "Expense removed"
+          });
+        })
         .catch(e => (this.error = e));
     },
     parseTimestamp(datetime) {
-      return new Date(datetime).toLocaleString();
+      return new Date(datetime).toLocaleDateString();
     },
     parseNumber(num) {
       return num.toLocaleString();
@@ -115,9 +129,17 @@ export default {
       if (arr.length > 0)
         return arr.map(elem => elem.value).reduce((a, b) => a + b);
       else return 0;
+    },
+    onUpdatedFunds(newFunds) {
+      console.log("UPDATED");
+      this.funds = newFunds;
     }
   }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.remove-expense {
+  cursor: pointer;
+}
+</style>
