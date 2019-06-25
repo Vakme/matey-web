@@ -7,19 +7,29 @@ import store from "./store/store";
 Vue.use(Router);
 
 const shouldNotBeAuthenticated = (to, from, next) => {
-  if (!store.getters["auth/getLoginState"]) {
-    next();
-    return;
-  }
-  next("/");
+  let loading = setInterval(function() {
+    if (store.getters["auth/getInitState"]) {
+      clearInterval(loading);
+      if (!store.getters["auth/getLoginState"]) {
+        next();
+        return;
+      }
+      next("/");
+    }
+  }, 500);
 };
 
 const shouldBeAuthenticated = (to, from, next) => {
-  if (store.getters["auth/getLoginState"]) {
-    next();
-    return;
-  }
-  next("/login");
+  let loading = setInterval(function() {
+    if (store.getters["auth/getInitState"]) {
+      clearInterval(loading);
+      if (store.getters["auth/getLoginState"]) {
+        next();
+        return;
+      }
+      next("/login");
+    }
+  }, 500);
 };
 
 export default new Router({

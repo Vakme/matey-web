@@ -73,7 +73,12 @@ export default {
           });
           this.$parent.close();
         })
-        .catch(e => (this.error = e));
+        .catch(e =>
+          this.$toast.open({
+            type: "is-danger",
+            message: "ERROR: Try later"
+          })
+        );
     }
   }
 };

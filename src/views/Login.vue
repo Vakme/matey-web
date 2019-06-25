@@ -15,7 +15,7 @@
         >
           Sign In
         </b-button>
-        {{errors}}
+        {{ errors }}
       </div>
     </div>
   </section>
@@ -34,9 +34,12 @@ export default {
   },
   methods: {
     handleClickSignIn() {
-      this.$store
-        .dispatch("auth/login")
-        .catch(() => (this.errors = "Login error"));
+      this.$store.dispatch("auth/login").catch(e =>
+        this.$toast.open({
+          type: "is-danger",
+          message: "ERROR: Try later"
+        })
+      );
     }
   }
 };

@@ -35,11 +35,11 @@
 
           <b-table-column label="Remove" centered>
             <span class="remove-expense">
-            <b-icon
-              icon="delete"
-              @click.native="onClickDelete(props.row.name)"
-            ></b-icon>
-              </span>
+              <b-icon
+                icon="delete"
+                @click.native="onClickDelete(props.row.name)"
+              ></b-icon>
+            </span>
           </b-table-column>
         </template>
       </b-table>
@@ -99,7 +99,12 @@ export default {
       this.$http
         .get("funds")
         .then(response => (this.funds = response.data.funds))
-        .catch(e => (this.error = e));
+        .catch(e =>
+          this.$toast.open({
+            type: "is-danger",
+            message: "ERROR: Try later"
+          })
+        );
     },
     onClickDelete(name) {
       this.$dialog.confirm({
@@ -117,7 +122,12 @@ export default {
             message: "Expense removed"
           });
         })
-        .catch(e => (this.error = e));
+        .catch(e =>
+          this.$toast.open({
+            type: "is-danger",
+            message: "ERROR: Try later"
+          })
+        );
     },
     parseTimestamp(datetime) {
       return new Date(datetime).toLocaleDateString();

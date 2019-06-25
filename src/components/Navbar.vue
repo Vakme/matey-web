@@ -82,14 +82,20 @@ export default {
   },
   methods: {
     handleClickSignIn() {
-      this.$store
-        .dispatch("auth/login")
-        .catch(() => (this.errors = "Login error"));
+      this.$store.dispatch("auth/login").catch(e =>
+        this.$toast.open({
+          type: "is-danger",
+          message: "ERROR: Try later"
+        })
+      );
     },
     handleClickSignOut() {
-      this.$store
-        .dispatch("auth/logout")
-        .catch(() => (this.errors = "Logout error"));
+      this.$store.dispatch("auth/logout").catch(e =>
+        this.$toast.open({
+          type: "is-danger",
+          message: "ERROR: Try later"
+        })
+      );
     }
   },
   computed: {
@@ -100,7 +106,9 @@ export default {
       return this.$store.getters["auth/getUser"].getBasicProfile().getEmail();
     },
     imageUrl() {
-      return this.$store.getters["auth/getUser"].getBasicProfile().getImageUrl();
+      return this.$store.getters["auth/getUser"]
+        .getBasicProfile()
+        .getImageUrl();
     }
   }
 };
@@ -113,7 +121,7 @@ export default {
 .profile-picture img {
   max-height: 100%;
 }
-  .buttons {
-    justify-content: center;
-  }
+.buttons {
+  justify-content: center;
+}
 </style>
