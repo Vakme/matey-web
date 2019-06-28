@@ -5,6 +5,10 @@
 yarn install
 ```
 
+Use `.env.local.sample` to create 2 configuration files:
+- `env.development.local` for serving app locally
+- `env.production.local` used in production build
+
 ### Compiles and hot-reloads for development
 ```
 yarn run serve
