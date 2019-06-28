@@ -9,9 +9,14 @@
       <router-link class="navbar-item" to="/">
         Matey
       </router-link>
+      <a role="button" :class="[isMenuActive ? 'is-active' : '', 'navbar-burger']" @click="isMenuActive = !isMenuActive"  aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
     </div>
 
-    <div id="navbarBasicExample" class="navbar-menu">
+    <div id="navbarBasicExample" :class="[isMenuActive ? 'is-active' : '', 'navbar-menu']">
       <div v-if="isLoggedIn" class="navbar-start">
         <router-link class="navbar-item" to="/">
           Home
@@ -77,7 +82,8 @@ export default {
   mixins: [AuthStateMixin],
   data() {
     return {
-      errors: ""
+      errors: "",
+      isMenuActive: false
     };
   },
   methods: {
