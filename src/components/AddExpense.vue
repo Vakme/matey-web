@@ -36,7 +36,7 @@
           Close
         </button>
         <button class="button is-primary" type="submit" @click="addExpense">
-          Login
+          Submit
         </button>
       </footer>
     </div>

@@ -37,7 +37,7 @@
             <span class="remove-expense">
               <b-icon
                 icon="delete"
-                @click.native="onClickDelete(props.row.name)"
+                @click.native="onClickDelete(props.row)"
               ></b-icon>
             </span>
           </b-table-column>
@@ -106,15 +106,15 @@ export default {
           })
         );
     },
-    onClickDelete(name) {
+    onClickDelete(row) {
       this.$dialog.confirm({
-        message: "Are you sure you want to delete expense " + name + "?",
-        onConfirm: () => this.deleteExpense(name)
+        message: "Are you sure you want to delete expense " + row.name + "?",
+        onConfirm: () => this.deleteExpense(row.id)
       });
     },
-    deleteExpense(name) {
+    deleteExpense(id) {
       this.$http
-        .delete("funds/" + name)
+        .delete("funds/" + id)
         .then(() => {
           this.getExpenses();
           this.$toast.open({
