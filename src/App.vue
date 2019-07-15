@@ -18,6 +18,9 @@ export default {
     isNotInit() {
       return !this.$store.getters["auth/getInitState"];
     }
+  },
+  mounted() {
+
   }
 };
 </script>

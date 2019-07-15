@@ -1,10 +1,12 @@
 import Vue from "vue";
 import router from "../router";
 import api from "../api";
+import {UserMock} from "../mocks/UserMock";
 
 const LOGIN = "LOGIN";
 const LOGOUT = "LOGOUT";
 const INITIALIZED = "INIT";
+const TEST = "TEST";
 
 const authModule = {
   namespaced: true,
@@ -18,7 +20,9 @@ const authModule = {
       state.isSignIn = Vue.prototype.$gAuth.isAuthorized;
       state.user = Vue.prototype.$gAuth.GoogleAuth.currentUser.get();
       api.defaults.headers.common["Authorization"] =
-        "Bearer " + state.user.getAuthResponse().id_token;
+        "Bearer " +
+        Vue.prototype.$gAuth.GoogleAuth.currentUser.get().getAuthResponse()
+          .id_token;
     },
     [LOGOUT](state) {
       state.user = null;
@@ -28,12 +32,25 @@ const authModule = {
     [INITIALIZED](state) {
       state.isInit = Vue.prototype.$gAuth.isInit;
       state.isSignIn = Vue.prototype.$gAuth.isAuthorized;
-      state.user = Vue.prototype.$gAuth.GoogleAuth.currentUser.get();
+      state.user = Vue.prototype.$gAuth.GoogleAuth.currentUser
+        .get()
+        .getBasicProfile();
       api.defaults.headers.common["Authorization"] =
-        "Bearer " + state.user.getAuthResponse().id_token;
+        "Bearer " +
+        Vue.prototype.$gAuth.GoogleAuth.currentUser.get().getAuthResponse()
+          .id_token;
+    },
+    [TEST](state) {
+      state.isInit = true;
+      state.user = UserMock;
+      state.isSignIn = true;
+      api.defaults.headers.common["Authorization"] = "";
     }
   },
   actions: {
+    initTestEnv({ commit }) {
+      commit(TEST);
+    },
     login({ commit }) {
       Vue.prototype.$gAuth
         .signIn()

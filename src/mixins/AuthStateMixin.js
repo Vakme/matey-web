@@ -8,6 +8,8 @@ export default {
     }
   },
   created() {
+    if (process.env.VUE_APP_TEST) this.$store.dispatch("auth/initTestEnv");
+
     if (!this.$store.getters["auth/getInitState"])
       this.$store
         .dispatch("auth/initializeAuth")

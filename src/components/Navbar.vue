@@ -106,14 +106,13 @@ export default {
   },
   computed: {
     username() {
-      return this.$store.getters["auth/getUser"].getBasicProfile().getName();
+      return this.$store.getters["auth/getUser"].getName();
     },
     email() {
-      return this.$store.getters["auth/getUser"].getBasicProfile().getEmail();
+      return this.$store.getters["auth/getUser"].getEmail();
     },
     imageUrl() {
       return this.$store.getters["auth/getUser"]
-        .getBasicProfile()
         .getImageUrl();
     }
   }
