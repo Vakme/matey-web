@@ -10,7 +10,10 @@ selenium-debug.log
 .env.*.local
 .env
 app.yaml
+results/
 coverage/
+tests/e2e/videos/
+tests/e2e/screenshots/
 
 # Log files
 npm-debug.log*

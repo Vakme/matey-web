@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     handleClickSignIn() {
-      this.$store.dispatch("auth/login").catch(e =>
+      this.$store.dispatch("auth/login").catch(() =>
         this.$toast.open({
           type: "is-danger",
           message: "ERROR: Try later"

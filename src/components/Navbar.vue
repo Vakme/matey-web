@@ -9,14 +9,23 @@
       <router-link class="navbar-item" to="/">
         Matey
       </router-link>
-      <a role="button" :class="[isMenuActive ? 'is-active' : '', 'navbar-burger']" @click="isMenuActive = !isMenuActive"  aria-label="menu" aria-expanded="false">
+      <a
+        role="button"
+        :class="[isMenuActive ? 'is-active' : '', 'navbar-burger']"
+        @click="isMenuActive = !isMenuActive"
+        aria-label="menu"
+        aria-expanded="false"
+      >
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
       </a>
     </div>
 
-    <div id="navbarBasicExample" :class="[isMenuActive ? 'is-active' : '', 'navbar-menu']">
+    <div
+      id="navbarBasicExample"
+      :class="[isMenuActive ? 'is-active' : '', 'navbar-menu']"
+    >
       <div v-if="isLoggedIn" class="navbar-start">
         <router-link class="navbar-item" to="/">
           Home
@@ -88,7 +97,7 @@ export default {
   },
   methods: {
     handleClickSignIn() {
-      this.$store.dispatch("auth/login").catch(e =>
+      this.$store.dispatch("auth/login").catch(() =>
         this.$toast.open({
           type: "is-danger",
           message: "ERROR: Try later"
@@ -96,7 +105,7 @@ export default {
       );
     },
     handleClickSignOut() {
-      this.$store.dispatch("auth/logout").catch(e =>
+      this.$store.dispatch("auth/logout").catch(() =>
         this.$toast.open({
           type: "is-danger",
           message: "ERROR: Try later"
@@ -112,8 +121,7 @@ export default {
       return this.$store.getters["auth/getUser"].getEmail();
     },
     imageUrl() {
-      return this.$store.getters["auth/getUser"]
-        .getImageUrl();
+      return this.$store.getters["auth/getUser"].getImageUrl();
     }
   }
 };

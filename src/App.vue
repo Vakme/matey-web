@@ -19,8 +19,6 @@ export default {
       return !this.$store.getters["auth/getInitState"];
     }
   },
-  mounted() {
-
-  }
+  mounted() {}
 };
 </script>

@@ -1,7 +1,7 @@
 import Vue from "vue";
 import router from "../router";
 import api from "../api";
-import {UserMock} from "../mocks/UserMock";
+import { UserMock } from "../mocks/UserMock";
 
 const LOGIN = "LOGIN";
 const LOGOUT = "LOGOUT";

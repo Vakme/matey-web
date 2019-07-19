@@ -36,7 +36,7 @@ export default {
     this.$http
       .get("summary")
       .then(response => (this.summary = response.data))
-      .catch(e =>
+      .catch(() =>
         this.$toast.open({
           type: "is-danger",
           message: "ERROR: Try later"

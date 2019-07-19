@@ -19,5 +19,10 @@ module.exports = {
     "jest-watch-typeahead/filename",
     "jest-watch-typeahead/testname"
   ],
-  collectCoverageFrom: ["src/**/*.{js,vue}", "!src/*.js"]
+  collectCoverageFrom: ["src/**/*.{js,vue}", "!src/*.js"],
+  reporters: [
+    "default",
+    ["jest-junit", { outputDirectory: "./results/jest" }],
+    ["jest-html-reporter", { outputPath: "./results/jest/test-report.html" }]
+  ]
 };

@@ -99,7 +99,7 @@ export default {
       this.$http
         .get("funds")
         .then(response => (this.funds = response.data.funds))
-        .catch(e =>
+        .catch(() =>
           this.$toast.open({
             type: "is-danger",
             message: "ERROR: Try later"
@@ -122,7 +122,7 @@ export default {
             message: "Expense removed"
           });
         })
-        .catch(e =>
+        .catch(() =>
           this.$toast.open({
             type: "is-danger",
             message: "ERROR: Try later"

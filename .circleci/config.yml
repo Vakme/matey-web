@@ -1,0 +1,92 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2.1
+orbs:
+  codecov: codecov/codecov@1.0.2
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:10.0.0
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/mongo:3.4.4
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "yarn.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run:
+          name: Install dependencies
+          command: yarn install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+      - run:
+          name: Build artifact
+          command: yarn build
+      # run tests!
+      - run:
+          name: Lint
+          command: yarn lint
+      - run:
+          name: Run test and coverage
+          command: yarn test:unit:cov
+
+      - store_test_results:
+          path: results
+      - codecov/upload:
+          file: coverage/lcov.info
+
+      - persist_to_workspace:
+          root: .
+          paths: dist
+  deploy:
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - checkout
+
+      - attach_workspace:
+          at: .
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "yarn.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run:
+          name: Create config
+          command: cp app.yaml.sample app.yaml
+      - run:
+          name: Authorize Google SDK
+          command: |
+            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+            gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+      - run:
+          name: Deploy app
+          command: gcloud --quiet app deploy
+
+workflows:
+  version: 2.1
+  -deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
