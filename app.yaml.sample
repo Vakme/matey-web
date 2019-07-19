@@ -1,8 +1,8 @@
 runtime: nodejs10
 service: default
 env_variables:
-  VUE_APP_CLIENT_ID: '<client_id>'
-  VUE_APP_HOSTNAME: '<hostname>'
+  VUE_APP_CLIENT_ID: ${VUE_APP_CLIENT_ID}
+  VUE_APP_HOSTNAME: ${VUE_APP_HOSTNAME}
 handlers:
   # Serve all static files with urls ending with a file extension
   - url: /(.*\..+)$
