@@ -1,4 +1,4 @@
-# matey-web
+# matey-web ![CircleCI](https://img.shields.io/circleci/build/github/Vakme/matey-web.svg) ![Codecov](https://img.shields.io/codecov/c/github/Vakme/matey-web.svg) ![GitHub](https://img.shields.io/github/license/Vakme/matey-web.svg) ![GitHub top language](https://img.shields.io/github/languages/top/Vakme/matey-web.svg)
 
 ## Project setup
 ```
