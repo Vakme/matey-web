@@ -13,7 +13,7 @@
           v-if="!isLoggedIn"
           :disabled="!isInit"
         >
-          Sign In
+          {{ $t("auth.signin") }}
         </b-button>
         {{ errors }}
       </div>

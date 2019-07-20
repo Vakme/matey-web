@@ -6,12 +6,16 @@
     <section class="modal-card-body">
       <div class="level is-mobile">
         <div class="level-item has-text-centered">
-          <p class="heading">{{ $t("expenses_modal.return_to") }}</p>
-          <p class="title">{{ summary.creditor }}</p>
+          <div>
+            <p class="heading">{{ $t("expenses_modal.return_to") }}</p>
+            <p class="title">{{ summary.creditor }}</p>
+          </div>
         </div>
         <div class="level-item has-text-centered">
-          <p class="heading">{{ $t("expenses_modal.value") }}</p>
-          <p class="title">{{ summary.diff.toLocaleString() }} zł</p>
+          <div>
+            <p class="heading">{{ $t("expenses_modal.value") }}</p>
+            <p class="title">{{ summary.diff.toLocaleString() }} zł</p>
+          </div>
         </div>
       </div>
     </section>
@@ -36,14 +40,19 @@ export default {
     this.$http
       .get("summary")
       .then(response => (this.summary = response.data))
-      .catch(() =>
+      .catch(() => {
         this.$toast.open({
           type: "is-danger",
           message: "ERROR: Try later"
-        })
-      );
+        });
+        this.$parent.close();
+      });
   }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.level.is-mobile {
+  flex-wrap: wrap;
+}
+</style>

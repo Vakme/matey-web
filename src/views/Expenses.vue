@@ -29,7 +29,11 @@
             {{ parseTimestamp(props.row.date) }}
           </b-table-column>
 
-          <b-table-column field="value" :label="$t('expenses_modal.value')" numeric>
+          <b-table-column
+            field="value"
+            :label="$t('expenses_modal.value')"
+            numeric
+          >
             {{ parseNumber(props.row.value) }} zł
           </b-table-column>
 

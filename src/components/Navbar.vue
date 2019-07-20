@@ -36,7 +36,14 @@
         </router-link>
       </div>
       <div class="navbar-end">
-        <div class="navbar-item has-dropdown is-hoverable" v-if="isLoggedIn">
+        <div
+          :class="[
+            profileDropdown ? 'is-active' : '',
+            'navbar-item has-dropdown'
+          ]"
+          v-if="isLoggedIn"
+          @click="profileDropdown = !profileDropdown"
+        >
           <a class="navbar-link">
             {{ $t("menu.profile") }}
           </a>
@@ -92,7 +99,8 @@ export default {
   data() {
     return {
       errors: "",
-      isMenuActive: false
+      isMenuActive: false,
+      profileDropdown: false
     };
   },
   methods: {

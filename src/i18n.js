@@ -20,8 +20,15 @@ function loadLocaleMessages() {
   return messages;
 }
 
+function getNavigatorLanguage() {
+  if (navigator.language.length > 2) {
+    return navigator.language.split("-")[0];
+  }
+  return navigator.language;
+}
+
 export default new VueI18n({
-  locale: navigator.language || "en",
+  locale: getNavigatorLanguage() || "en",
   fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || "en",
   messages: loadLocaleMessages()
 });
