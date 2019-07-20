@@ -1,23 +1,23 @@
 <template>
   <div id="Summary" class="modal-card">
     <header class="modal-card-head">
-      <p class="modal-card-title">Summary</p>
+      <p class="modal-card-title">{{ $t("expenses_modal.summary_title") }}</p>
     </header>
     <section class="modal-card-body">
       <div class="level is-mobile">
         <div class="level-item has-text-centered">
-          <p class="heading">Return to</p>
+          <p class="heading">{{ $t("expenses_modal.return_to") }}</p>
           <p class="title">{{ summary.creditor }}</p>
         </div>
         <div class="level-item has-text-centered">
-          <p class="heading">Value</p>
+          <p class="heading">{{ $t("expenses_modal.value") }}</p>
           <p class="title">{{ summary.diff.toLocaleString() }} zł</p>
         </div>
       </div>
     </section>
     <footer class="modal-card-foot">
       <button class="button" type="button" @click="$parent.close()">
-        Close
+        {{ $t("expenses_modal.close") }}
       </button>
     </footer>
   </div>

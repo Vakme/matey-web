@@ -28,17 +28,17 @@
     >
       <div v-if="isLoggedIn" class="navbar-start">
         <router-link class="navbar-item" to="/">
-          Home
+          {{ $t("menu.home") }}
         </router-link>
 
         <router-link class="navbar-item" to="/expenses">
-          Expenses
+          {{ $t("menu.expenses") }}
         </router-link>
       </div>
       <div class="navbar-end">
         <div class="navbar-item has-dropdown is-hoverable" v-if="isLoggedIn">
           <a class="navbar-link">
-            Profile
+            {{ $t("menu.profile") }}
           </a>
           <div class="navbar-dropdown is-right">
             <div class="dropdown-content has-text-centered">
@@ -60,7 +60,7 @@
                   :disabled="!isInit"
                   outlined
                 >
-                  Sign Out
+                  {{ $t("auth.signout") }}
                 </b-button>
               </div>
             </div>
@@ -74,7 +74,7 @@
               :disabled="!isInit"
               outlined
             >
-              Sign In
+              {{ $t("auth.signin") }}
             </b-button>
           </div>
         </div>

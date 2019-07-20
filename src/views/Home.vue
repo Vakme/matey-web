@@ -4,10 +4,10 @@
       <div class="tile is-ancestor">
         <div class="tile is-4 is-vertical is-parent">
           <div class="tile is-child box">
-            <p class="title">Hello {{ username }}!</p>
+            <p class="title">{{ $t("home.greetings") }} {{ username }}!</p>
           </div>
           <div class="tile is-child box">
-            <p class="subtitle">Take a look at your profile (TBD)</p>
+            <p class="subtitle">{{ $t("home.profile_tile") }} (TBD)</p>
             <div class="buttons">
               <b-button
                 type="is-primary"
@@ -15,7 +15,7 @@
                 :disabled="!isInit"
                 outlined
               >
-                Sign Out
+                {{ $t("auth.signout") }}
               </b-button>
             </div>
           </div>
@@ -25,13 +25,13 @@
             class="tile is-child box expenses-tile"
             @click.self="handleClickExpenses"
           >
-            <p class="title">Take look at your expenses</p>
+            <p class="title">{{ $t("home.expenses_tile") }}</p>
             <div class="buttons">
               <b-button
                 class="button"
                 type="is-link"
                 @click="summaryModal = true"
-                >Sum up</b-button
+                >{{ $t("expenses.sumup_button") }}</b-button
               >
             </div>
           </div>

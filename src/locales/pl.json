@@ -1,0 +1,34 @@
+{
+  "menu": {
+    "home": "Strona główna",
+    "expenses": "Wydatki",
+    "profile": "Profil użytkownika"
+  },
+  "auth": {
+    "signout": "Wyloguj",
+    "signin": "Zaloguj"
+  },
+  "home": {
+    "greetings": "Cześć",
+    "profile_tile": "Zobacz swój profil",
+    "expenses_tile": "Zobacz swoje wydatki"
+  },
+  "expenses": {
+    "sumup_button": "Podsumuj",
+    "title": "Wydatki",
+    "add_new": "Dodaj nowy wydatek",
+    "amount": "Liczba wydatków"
+  },
+  "expenses_modal": {
+    "add_title": "Dodaj wydatek",
+    "name": "Nazwa",
+    "name_placeholder": "Nazwa wydatku",
+    "date": "Wybierz datę",
+    "date_placeholder": "Kliknij by wybrać",
+    "value": "Wartość",
+    "close": "Zamknij",
+    "submit": "Prześlij",
+    "summary_title": "Podsumowanie",
+    "return_to": "Zwróć do"
+  }
+}

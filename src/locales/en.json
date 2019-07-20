@@ -1,0 +1,34 @@
+{
+  "menu": {
+    "home": "Home",
+    "expenses": "Expenses",
+    "profile": "Profile"
+  },
+  "auth": {
+    "signout": "Sign out",
+    "signin": "Sign in"
+  },
+  "home": {
+    "greetings": "Hello",
+    "profile_tile": "Take a look at your profile",
+    "expenses_tile": "Take a look at your expenses"
+  },
+  "expenses": {
+    "sumup_button": "Sum up",
+    "title": "Expenses",
+    "add_new": "Add new expense",
+    "amount": "Number of expenses"
+  },
+  "expenses_modal": {
+    "add_title": "Add expense",
+    "name": "Name",
+    "name_placeholder": "Name of an expense",
+    "date": "Pick a date",
+    "date_placeholder": "Click to choose",
+    "value": "Value",
+    "close": "Close",
+    "submit": "Submit",
+    "summary_title": "Summary",
+    "return_to": "Return to"
+  }
+}
