@@ -1,12 +1,9 @@
-import { shallowMount } from "@vue/test-utils";
 import Home from "@/views/Home.vue";
 
 describe("HelloWorld.vue", () => {
-  it("renders props.msg when passed", () => {
-    const msg = "";
-    const wrapper = shallowMount(Home, {
-      propsData: { msg }
-    });
-    expect(wrapper.text()).toMatch(msg);
+  it("sets the correct default data", () => {
+    expect(typeof Home.data).toBe("function");
+    const defaultData = Home.data();
+    expect(defaultData.summaryModal).toBe(false);
   });
 });

@@ -95,7 +95,6 @@ export default {
   },
   methods: {
     getExpenses() {
-      console.log("GET");
       this.$http
         .get("funds")
         .then(response => (this.funds = response.data.funds))
