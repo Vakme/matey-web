@@ -7,6 +7,7 @@ import instance from "./api";
 import VueAxios from "vue-axios";
 import Buefy from "buefy";
 import "buefy/dist/buefy.css";
+import i18n from "./i18n";
 
 const gauthOption = {
   clientId: process.env.VUE_APP_CLIENT_ID,
@@ -22,5 +23,6 @@ Vue.config.productionTip = false;
 new Vue({
   router,
   store,
+  i18n,
   render: h => h(App)
 }).$mount("#app");

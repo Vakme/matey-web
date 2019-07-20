@@ -3,13 +3,13 @@
     <div class="container">
       <div class="level">
         <div class="level-left">
-          <h1 class="title">Expenses</h1>
+          <h1 class="title">{{ $t("expenses.title") }}</h1>
         </div>
         <div class="level-right">
           <div class="level-item">
-            <b-button type="is-success" @click="addModal = true"
-              >Add new expense</b-button
-            >
+            <b-button type="is-success" @click="addModal = true">{{
+              $t("expenses.add_new")
+            }}</b-button>
           </div>
         </div>
       </div>
@@ -21,15 +21,15 @@
         :mobile-cards="true"
       >
         <template slot-scope="props">
-          <b-table-column field="name" label="Name">
+          <b-table-column field="name" :label="$t('expenses_modal.name')">
             {{ props.row.name }}
           </b-table-column>
 
-          <b-table-column field="date" label="Date">
+          <b-table-column field="date" :label="$t('expenses_modal.date')">
             {{ parseTimestamp(props.row.date) }}
           </b-table-column>
 
-          <b-table-column field="value" label="Value" numeric>
+          <b-table-column field="value" :label="$t('expenses_modal.value')" numeric>
             {{ parseNumber(props.row.value) }} zł
           </b-table-column>
 
@@ -46,13 +46,13 @@
       <div class="level is-mobile">
         <div class="level-item has-text-centered">
           <div>
-            <p class="heading">Number of expenses</p>
+            <p class="heading">{{ $t("expenses.amount") }}</p>
             <p class="title">{{ funds.length }}</p>
           </div>
         </div>
         <div class="level-item has-text-centered">
           <div>
-            <p class="heading">Value</p>
+            <p class="heading">{{ $t("expenses_modal.value") }}</p>
             <p class="title">{{ parseNumber(calculateSum(funds)) }} zł</p>
           </div>
         </div>
@@ -61,7 +61,7 @@
         class="button is-fullwidth"
         type="is-link"
         @click="summaryModal = true"
-        >Sum up</b-button
+        >{{ $t("expenses.sumup_button") }}</b-button
       >
     </div>
     <b-modal :active.sync="summaryModal" has-modal-card>
