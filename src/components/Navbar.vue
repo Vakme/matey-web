@@ -34,6 +34,10 @@
         <router-link class="navbar-item" to="/expenses">
           {{ $t("menu.expenses") }}
         </router-link>
+
+        <router-link class="navbar-item" to="/archive">
+          {{ $t("menu.archive") }}
+        </router-link>
       </div>
       <div class="navbar-end">
         <div

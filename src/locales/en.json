@@ -2,7 +2,8 @@
   "menu": {
     "home": "Home",
     "expenses": "Expenses",
-    "profile": "Profile"
+    "profile": "Profile",
+    "archive": "Archive"
   },
   "auth": {
     "signout": "Sign out",
@@ -22,11 +23,16 @@
     "partner_tab": "Partner's expenses",
     "delete_dialog": "Are you sure you want to remove expense"
   },
+  "archive": {
+    "title": "Archive",
+    "my_tab": "My archive",
+    "partner_tab": "Partner's archive"
+  },
   "expenses_modal": {
     "add_title": "Add expense",
     "name": "Name",
     "name_placeholder": "Name of an expense",
-    "date": "Pick a date",
+    "date": "Date",
     "date_placeholder": "Click to choose",
     "value": "Value",
     "close": "Close",
