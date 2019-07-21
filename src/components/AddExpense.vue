@@ -16,19 +16,20 @@
           </b-input>
         </b-field>
 
+        <b-field :label="$t('expenses_modal.value')">
+          <b-numberinput step="0.01" :value="value" v-model="value">
+          </b-numberinput>
+        </b-field>
+
         <b-field :label="$t('expenses_modal.date')">
           <b-datepicker
             v-model="date"
             :value="date"
             :placeholder="$t('expenses_modal.date_placeholder')"
+            size="is-small"
             icon="calendar-today"
           >
           </b-datepicker>
-        </b-field>
-
-        <b-field :label="$t('expenses_modal.value')">
-          <b-numberinput step="0.01" :value="value" v-model="value">
-          </b-numberinput>
         </b-field>
       </section>
       <footer class="modal-card-foot">
@@ -65,8 +66,7 @@ export default {
       this.$http
         .post("funds", newExpense)
         .then(response => {
-          console.log(response.data);
-          this.$emit("update", response.data.funds);
+          this.$emit("update", response.data);
           this.$toast.open({
             type: "is-success",
             message: "Expense added"
