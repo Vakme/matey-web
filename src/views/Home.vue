@@ -83,7 +83,9 @@ export default {
 };
 </script>
 <style lang="scss">
-@import "~bulma/sass/utilities/_all";
+@import "~bulmaswatch/darkly/_variables.scss";
+@import "~bulma";
+@import "~bulmaswatch/darkly/_overrides.scss";
 .tile .buttons {
   justify-content: center;
 }
@@ -91,7 +93,7 @@ export default {
   cursor: pointer;
   text-decoration: none;
   &:hover {
-    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px $link;
+    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px #7957d5;
   }
 }
 </style>

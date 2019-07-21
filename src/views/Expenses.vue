@@ -13,7 +13,10 @@
           </div>
         </div>
       </div>
-      <b-tabs v-model="activeTab">
+      <b-tabs
+        v-model="activeTab"
+        class="box"
+      >
         <b-tab-item :label="$t('expenses.my_tab')">
           <expense-array
             :funds="funds"

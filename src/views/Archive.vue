@@ -6,7 +6,10 @@
           <h1 class="title">{{ $t("archive.title") }}</h1>
         </div>
       </div>
-      <b-tabs v-model="activeTab">
+      <b-tabs
+        v-model="activeTab"
+        class="box"
+      >
         <b-tab-item :label="$t('archive.my_tab')">
           <expense-array :funds="myArchive" :removable="false"></expense-array>
         </b-tab-item>

@@ -1,7 +1,7 @@
 <template>
   <nav
     id="Navbar"
-    class="navbar is-light"
+    class="navbar is-dark"
     role="navigation"
     aria-label="main navigation"
   >
@@ -80,10 +80,9 @@
         <div class="navbar-item" v-else>
           <div class="buttons">
             <b-button
-              type="is-primary"
+              type="is-success"
               @click="handleClickSignIn"
               :disabled="!isInit"
-              outlined
             >
               {{ $t("auth.signin") }}
             </b-button>
