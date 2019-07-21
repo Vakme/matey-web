@@ -53,6 +53,12 @@ export default new Router({
       name: "expenses",
       beforeEnter: shouldBeAuthenticated,
       component: () => import("./views/Expenses.vue")
+    },
+    {
+      path: "/archive",
+      name: "archive",
+      beforeEnter: shouldBeAuthenticated,
+      component: () => import("./views/Archive.vue")
     }
   ]
 });

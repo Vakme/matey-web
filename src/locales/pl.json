@@ -2,7 +2,8 @@
   "menu": {
     "home": "Strona główna",
     "expenses": "Wydatki",
-    "profile": "Profil użytkownika"
+    "profile": "Profil użytkownika",
+    "archive": "Archiwum"
   },
   "auth": {
     "signout": "Wyloguj",
@@ -22,11 +23,16 @@
     "partner_tab": "Wydatki partnera",
     "delete_dialog": "Czy na pewno chcesz usunąć wydatek"
   },
+  "archive": {
+    "title": "Archiwum",
+    "my_tab": "Moje archiwum",
+    "partner_tab": "Archiwum partnera"
+  },
   "expenses_modal": {
     "add_title": "Dodaj wydatek",
     "name": "Nazwa",
     "name_placeholder": "Nazwa wydatku",
-    "date": "Wybierz datę",
+    "date": "Data",
     "date_placeholder": "Kliknij by wybrać",
     "value": "Wartość",
     "close": "Zamknij",

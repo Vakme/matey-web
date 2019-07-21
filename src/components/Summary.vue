@@ -19,9 +19,12 @@
         </div>
       </div>
     </section>
-    <footer class="modal-card-foot">
+    <footer class="modal-card-foot has-text-right">
       <button class="button" type="button" @click="$parent.close()">
         {{ $t("expenses_modal.close") }}
+      </button>
+      <button class="button is-primary" type="submit" @click="moveToArchive">
+        {{ $t("expenses_modal.submit") }}
       </button>
     </footer>
   </div>
@@ -32,7 +35,7 @@ export default {
   name: "Summary",
   data() {
     return {
-      summary: {},
+      summary: { creditor: "", diff: 0 },
       error: ""
     };
   },
@@ -47,6 +50,26 @@ export default {
         });
         this.$parent.close();
       });
+  },
+  methods: {
+    moveToArchive() {
+      this.$http
+        .post("archive")
+        .then(() => {
+          this.$emit("update", { me: { funds: [] }, partner: { funds: [] } });
+          this.$toast.open({
+            type: "is-success",
+            message: "Moved successfully"
+          });
+          this.$router.push("archive");
+        })
+        .catch(() =>
+          this.$toast.open({
+            type: "is-danger",
+            message: "ERROR: Try later"
+          })
+        );
+    }
   }
 };
 </script>
@@ -54,5 +77,8 @@ export default {
 <style scoped>
 .level.is-mobile {
   flex-wrap: wrap;
+}
+.modal-card-foot {
+  justify-content: space-between;
 }
 </style>
