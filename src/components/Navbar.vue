@@ -103,6 +103,11 @@ export default {
       profileDropdown: false
     };
   },
+  watch: {
+    $route() {
+      this.isMenuActive = false;
+    }
+  },
   methods: {
     handleClickSignIn() {
       this.$store.dispatch("auth/login").catch(() =>

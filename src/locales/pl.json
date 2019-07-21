@@ -17,7 +17,10 @@
     "sumup_button": "Podsumuj",
     "title": "Wydatki",
     "add_new": "Dodaj nowy wydatek",
-    "amount": "Liczba wydatków"
+    "amount": "Liczba wydatków",
+    "my_tab": "Moje wydatki",
+    "partner_tab": "Wydatki partnera",
+    "delete_dialog": "Czy na pewno chcesz usunąć wydatek"
   },
   "expenses_modal": {
     "add_title": "Dodaj wydatek",

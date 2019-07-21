@@ -17,7 +17,10 @@
     "sumup_button": "Sum up",
     "title": "Expenses",
     "add_new": "Add new expense",
-    "amount": "Number of expenses"
+    "amount": "Number of expenses",
+    "my_tab": "My expenses",
+    "partner_tab": "Partner's expenses",
+    "delete_dialog": "Are you sure you want to remove expense"
   },
   "expenses_modal": {
     "add_title": "Add expense",

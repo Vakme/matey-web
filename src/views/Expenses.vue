@@ -13,54 +13,21 @@
           </div>
         </div>
       </div>
-      <b-table
-        class="table"
-        :data="funds"
-        :striped="true"
-        :hoverable="true"
-        :mobile-cards="true"
-      >
-        <template slot-scope="props">
-          <b-table-column field="name" :label="$t('expenses_modal.name')">
-            {{ props.row.name }}
-          </b-table-column>
-
-          <b-table-column field="date" :label="$t('expenses_modal.date')">
-            {{ parseTimestamp(props.row.date) }}
-          </b-table-column>
-
-          <b-table-column
-            field="value"
-            :label="$t('expenses_modal.value')"
-            numeric
-          >
-            {{ parseNumber(props.row.value) }} zł
-          </b-table-column>
-
-          <b-table-column label="Remove" centered>
-            <span class="remove-expense">
-              <b-icon
-                icon="delete"
-                @click.native="onClickDelete(props.row)"
-              ></b-icon>
-            </span>
-          </b-table-column>
-        </template>
-      </b-table>
-      <div class="level is-mobile">
-        <div class="level-item has-text-centered">
-          <div>
-            <p class="heading">{{ $t("expenses.amount") }}</p>
-            <p class="title">{{ funds.length }}</p>
-          </div>
-        </div>
-        <div class="level-item has-text-centered">
-          <div>
-            <p class="heading">{{ $t("expenses_modal.value") }}</p>
-            <p class="title">{{ parseNumber(calculateSum(funds)) }} zł</p>
-          </div>
-        </div>
-      </div>
+      <b-tabs v-model="activeTab">
+        <b-tab-item :label="$t('expenses.my_tab')">
+          <expense-array
+            :funds="funds"
+            :removable="true"
+            @delete="deleteExpense"
+          ></expense-array>
+        </b-tab-item>
+        <b-tab-item :label="$t('expenses.partner_tab')">
+          <expense-array
+            :funds="partnerFunds"
+            :removable="false"
+          ></expense-array>
+        </b-tab-item>
+      </b-tabs>
       <b-button
         class="button is-fullwidth"
         type="is-link"
@@ -72,7 +39,7 @@
       <modal-summary></modal-summary>
     </b-modal>
     <b-modal :active.sync="addModal">
-      <modal-add v-on:update="onUpdatedFunds"></modal-add>
+      <modal-add @update="onUpdatedFunds"></modal-add>
     </b-modal>
   </section>
 </template>
@@ -80,18 +47,22 @@
 <script>
 import Summary from "@/components/Summary";
 import AddExpense from "@/components/AddExpense";
+import ExpenseArray from "../components/ExpenseArray";
 export default {
   name: "Expenses",
   components: {
     "modal-summary": Summary,
-    "modal-add": AddExpense
+    "modal-add": AddExpense,
+    "expense-array": ExpenseArray
   },
   data() {
     return {
       funds: [],
+      partnerFunds: [],
       summaryModal: false,
       addModal: false,
-      error: ""
+      error: "",
+      activeTab: 0
     };
   },
   mounted() {
@@ -101,19 +72,17 @@ export default {
     getExpenses() {
       this.$http
         .get("funds")
-        .then(response => (this.funds = response.data.funds))
+        .then(response => {
+          console.log(response.data);
+          this.funds = response.data.me.funds;
+          this.partnerFunds = response.data.partner.funds;
+        })
         .catch(() =>
           this.$toast.open({
             type: "is-danger",
             message: "ERROR: Try later"
           })
         );
-    },
-    onClickDelete(row) {
-      this.$dialog.confirm({
-        message: "Are you sure you want to delete expense " + row.name + "?",
-        onConfirm: () => this.deleteExpense(row.id)
-      });
     },
     deleteExpense(id) {
       this.$http
@@ -132,20 +101,10 @@ export default {
           })
         );
     },
-    parseTimestamp(datetime) {
-      return new Date(datetime).toLocaleDateString();
-    },
-    parseNumber(num) {
-      return num.toLocaleString();
-    },
-    calculateSum(arr) {
-      if (arr.length > 0)
-        return arr.map(elem => elem.value).reduce((a, b) => a + b);
-      else return 0;
-    },
-    onUpdatedFunds(newFunds) {
+    onUpdatedFunds(newData) {
       console.log("UPDATED");
-      this.funds = newFunds;
+      this.funds = newData.me.funds;
+      this.partnerFunds = newData.partner.funds;
     }
   }
 };
