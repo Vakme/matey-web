@@ -33,10 +33,23 @@
         </b-field>
       </section>
       <footer class="modal-card-foot">
-        <button class="button" type="button" @click="$parent.close()">
+        <button class="button" type="button" @click="closeModal()">
           {{ $t("expenses_modal.close") }}
         </button>
-        <button class="button is-primary" type="submit" @click="addExpense">
+        <button
+          class="button is-primary"
+          type="submit"
+          @click="editExpense"
+          v-if="expense"
+        >
+          {{ $t("expenses_modal.submit") }}
+        </button>
+        <button
+          class="button is-primary"
+          type="submit"
+          @click="addExpense"
+          v-else
+        >
           {{ $t("expenses_modal.submit") }}
         </button>
       </footer>
@@ -54,6 +67,16 @@ export default {
       value: 0,
       error: ""
     };
+  },
+  props: {
+    expense: Object
+  },
+  mounted: function() {
+    if (this.expense) {
+      this.name = this.expense.name;
+      this.date = this.expense.date;
+      this.value = this.expense.value;
+    }
   },
   methods: {
     addExpense(e) {
@@ -79,6 +102,37 @@ export default {
             message: "ERROR: Try later"
           })
         );
+    },
+    editExpense(e) {
+      e.preventDefault();
+      let newExpense = {
+        name: this.name,
+        date: this.date,
+        value: this.value
+      };
+      this.$http
+        .put("funds/" + this.expense.id, newExpense)
+        .then(response => {
+          this.$emit("update", response.data);
+          this.$toast.open({
+            type: "is-success",
+            message: "Expense changed"
+          });
+          this.$parent.close();
+        })
+        .catch(() =>
+          this.$toast.open({
+            type: "is-danger",
+            message: "ERROR: Try later"
+          })
+        );
+    },
+    closeModal() {
+      this.expense = null;
+      this.name = "";
+      this.date = new Date();
+      this.value = 0;
+      this.$parent.close();
     }
   }
 };

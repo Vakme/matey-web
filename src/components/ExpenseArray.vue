@@ -24,8 +24,14 @@
           {{ parseNumber(props.row.value) }} zł
         </b-table-column>
 
-        <b-table-column label="Remove" centered v-if="removable">
-          <span class="remove-expense">
+        <b-table-column label="Actions" centered v-if="removable">
+          <span class="expense-icon">
+            <b-icon
+              icon="pencil"
+              @click.native="onClickUpdate(props.row)"
+            ></b-icon>
+          </span>
+          <span class="expense-icon">
             <b-icon
               icon="delete"
               @click.native="onClickDelete(props.row)"
@@ -65,6 +71,9 @@ export default {
         onConfirm: () => this.$emit("delete", row.id)
       });
     },
+    onClickUpdate(row) {
+      this.$emit("update", row);
+    },
     parseTimestamp(datetime) {
       return new Date(datetime).toLocaleDateString();
     },
@@ -80,4 +89,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.expense-icon {
+  cursor: pointer;
+  margin: 0 5px;
+}
+</style>

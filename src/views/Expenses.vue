@@ -7,7 +7,7 @@
         </div>
         <div class="level-right">
           <div class="level-item">
-            <b-button type="is-success" @click="addModal = true">{{
+            <b-button type="is-success" @click="updateExpense(null)">{{
               $t("expenses.add_new")
             }}</b-button>
           </div>
@@ -19,6 +19,7 @@
             :funds="funds"
             :removable="true"
             @delete="deleteExpense"
+            @update="updateExpense"
           ></expense-array>
         </b-tab-item>
         <b-tab-item :label="$t('expenses.partner_tab')">
@@ -39,7 +40,7 @@
       <modal-summary></modal-summary>
     </b-modal>
     <b-modal :active.sync="addModal">
-      <modal-add @update="onUpdatedFunds"></modal-add>
+      <modal-add @update="onUpdatedFunds" :expense="currentExpense"></modal-add>
     </b-modal>
   </section>
 </template>
@@ -62,7 +63,8 @@ export default {
       summaryModal: false,
       addModal: false,
       error: "",
-      activeTab: 0
+      activeTab: 0,
+      currentExpense: null
     };
   },
   mounted() {
@@ -105,13 +107,13 @@ export default {
       console.log("UPDATED");
       this.funds = newData.me.funds;
       this.partnerFunds = newData.partner.funds;
+    },
+    updateExpense(newData) {
+      this.currentExpense = newData;
+      this.addModal = true;
     }
   }
 };
 </script>
 
-<style scoped>
-.remove-expense {
-  cursor: pointer;
-}
-</style>
+<style scoped></style>
