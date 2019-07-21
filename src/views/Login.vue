@@ -1,5 +1,5 @@
 <template>
-  <section id="Login" class="hero is-primary is-fullheight-with-navbar is-bold">
+  <section id="Login" class="hero is-fullheight-with-navbar">
     <div class="hero-body">
       <div class="container has-text-centered">
         <h1 class="title">
