@@ -8,6 +8,7 @@ import VueAxios from "vue-axios";
 import Buefy from "buefy";
 import "buefy/dist/buefy.css";
 import i18n from "./i18n";
+import "@/assets/styles.scss";
 
 const gauthOption = {
   clientId: process.env.VUE_APP_CLIENT_ID,

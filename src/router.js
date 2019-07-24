@@ -59,6 +59,11 @@ export default new Router({
       name: "archive",
       beforeEnter: shouldBeAuthenticated,
       component: () => import("./views/Archive.vue")
+    },
+    {
+      path: "/progress",
+      name: "progress",
+      component: () => import("./views/Progress.vue")
     }
   ]
 });

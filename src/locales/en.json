@@ -3,7 +3,8 @@
     "home": "Home",
     "expenses": "Expenses",
     "profile": "Profile",
-    "archive": "Archive"
+    "archive": "Archive",
+    "progress": "Progress"
   },
   "auth": {
     "signout": "Sign out",
@@ -39,5 +40,10 @@
     "submit": "Submit",
     "summary_title": "Summary",
     "return_to": "Return to"
+  },
+  "progress": {
+    "details": "Details",
+    "closed": "Closed",
+    "issues": "issues"
   }
 }
