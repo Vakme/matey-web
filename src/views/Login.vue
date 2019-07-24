@@ -45,4 +45,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.hero {
+  background-color: transparent;
+}
+</style>

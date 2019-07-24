@@ -40,6 +40,9 @@
         </router-link>
       </div>
       <div class="navbar-end">
+        <router-link class="navbar-item" to="/progress">
+          {{ $t("menu.progress") }}
+        </router-link>
         <div
           :class="[
             profileDropdown ? 'is-active' : '',
@@ -152,5 +155,8 @@ export default {
 }
 .buttons {
   justify-content: center;
+}
+.navbar-dropdown {
+  padding: 0;
 }
 </style>

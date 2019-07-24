@@ -3,7 +3,8 @@
     "home": "Strona główna",
     "expenses": "Wydatki",
     "profile": "Profil użytkownika",
-    "archive": "Archiwum"
+    "archive": "Archiwum",
+    "progress": "Postęp prac"
   },
   "auth": {
     "signout": "Wyloguj",
@@ -39,5 +40,10 @@
     "submit": "Prześlij",
     "summary_title": "Podsumowanie",
     "return_to": "Zwróć do"
+  },
+  "progress": {
+    "details": "Szczegóły",
+    "closed": "Zamknięto",
+    "issues": "zadań"
   }
 }
