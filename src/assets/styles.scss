@@ -1,3 +1,11 @@
-@import "~bulmaswatch/darkly/_variables.scss";
+@import "~bulmaswatch/superhero/_variables.scss";
 @import "~bulma";
-@import "~bulmaswatch/darkly/_overrides.scss";
+@import "~bulmaswatch/superhero/_overrides.scss";
+
+.section {
+  background-color: transparent;
+}
+
+.title.view-title {
+  color: $dark;
+}

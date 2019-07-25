@@ -29,7 +29,7 @@
             <div class="buttons">
               <b-button
                 class="button"
-                type="is-link"
+                type="is-primary"
                 @click="summaryModal = true"
                 >{{ $t("expenses.sumup_button") }}</b-button
               >
@@ -83,14 +83,19 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "../assets/styles";
 .tile .buttons {
   justify-content: center;
 }
 .expenses-tile {
   cursor: pointer;
   text-decoration: none;
+  background-color: $dark;
+  box-shadow: none;
+  transition: background-color 0.3s, box-shadow 0.3s;
   &:hover {
-    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px #7957d5;
+    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px $primary;
+    background-color: $background;
   }
 }
 </style>

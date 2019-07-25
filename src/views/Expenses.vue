@@ -3,7 +3,7 @@
     <div class="container">
       <div class="level">
         <div class="level-left">
-          <h1 class="title">{{ $t("expenses.title") }}</h1>
+          <h1 class="title view-title">{{ $t("expenses.title") }}</h1>
         </div>
         <div class="level-right">
           <div class="level-item">
@@ -13,10 +13,7 @@
           </div>
         </div>
       </div>
-      <b-tabs
-        v-model="activeTab"
-        class="box"
-      >
+      <b-tabs v-model="activeTab" class="box">
         <b-tab-item :label="$t('expenses.my_tab')">
           <expense-array
             :funds="funds"
@@ -34,7 +31,7 @@
       </b-tabs>
       <b-button
         class="button is-fullwidth"
-        type="is-link"
+        type="is-primary"
         @click="summaryModal = true"
         >{{ $t("expenses.sumup_button") }}</b-button
       >

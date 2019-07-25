@@ -3,7 +3,7 @@
     <div class="container">
       <div class="level">
         <div class="level-left">
-          <h1 class="title">{{ $t("archive.title") }}</h1>
+          <h1 class="title view-title">{{ $t("archive.title") }}</h1>
         </div>
       </div>
       <b-tabs v-model="activeTab" class="box">

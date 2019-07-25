@@ -1,6 +1,7 @@
 <template>
   <section id="Progress" class="section">
     <div class="container">
+      <div class="title is-1 view-title">{{ $t("menu.progress") }}</div>
       <div class="tile is-ancestor">
         <div class="tile is-parent">
           <div class="tile is-child box">
