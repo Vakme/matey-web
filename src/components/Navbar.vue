@@ -7,7 +7,7 @@
   >
     <div class="navbar-brand">
       <router-link class="navbar-item" to="/">
-        Matey
+        <span class="title">EXPRESSO</span>
       </router-link>
       <a
         role="button"
