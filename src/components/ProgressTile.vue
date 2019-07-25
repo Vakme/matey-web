@@ -10,9 +10,9 @@
         </div>
         <div class="level-right">
           <a class="level-item" :href="m.html_url" target="_blank">
-            <b-button size="is-small" type="is-link">
-              {{ $t("progress.details") }}</b-button
-            >
+            <b-button size="is-small" type="is-link" icon-left="github-circle">
+              {{ $t("progress.details") }}
+            </b-button>
           </a>
         </div>
       </div>
