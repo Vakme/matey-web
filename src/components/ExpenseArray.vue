@@ -17,6 +17,14 @@
         </b-table-column>
 
         <b-table-column
+          v-if="showTypes"
+          field="type"
+          :label="$t('expenses_modal.type')"
+        >
+          {{ $t("expenses.types." + props.row.type) }}
+        </b-table-column>
+
+        <b-table-column
           field="value"
           :label="$t('expenses_modal.value')"
           numeric
@@ -62,7 +70,8 @@ export default {
   name: "ExpenseArray",
   props: {
     funds: Array,
-    removable: Boolean
+    removable: Boolean,
+    showTypes: Boolean
   },
   methods: {
     onClickDelete(row) {

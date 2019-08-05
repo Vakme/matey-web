@@ -22,7 +22,11 @@
     "amount": "Liczba wydatków",
     "my_tab": "Moje wydatki",
     "partner_tab": "Wydatki partnera",
-    "delete_dialog": "Czy na pewno chcesz usunąć wydatek"
+    "delete_dialog": "Czy na pewno chcesz usunąć wydatek",
+    "types": {
+      "common": "Wspólny",
+      "personal": "Osobisty"
+    }
   },
   "archive": {
     "title": "Archiwum",
@@ -37,6 +41,7 @@
     "date_placeholder": "Kliknij by wybrać",
     "value": "Wartość",
     "close": "Zamknij",
+    "type": "Typ",
     "submit": "Prześlij",
     "summary_title": "Podsumowanie",
     "return_to": "Zwróć do"
