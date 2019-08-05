@@ -5,7 +5,11 @@
         <p class="modal-card-title">{{ $t("expenses_modal.add_title") }}</p>
       </header>
       <section class="modal-card-body">
-        <b-field :label="$t('expenses_modal.name')">
+        <b-field
+          :label="$t('expenses_modal.name')"
+          :type="{ 'is-danger': hasError }"
+          :message="{ 'Field cannot be empty': hasError }"
+        >
           <b-input
             type="text"
             :value="name"
@@ -65,7 +69,8 @@ export default {
       name: "",
       date: new Date(),
       value: 0,
-      error: ""
+      error: "",
+      hasError: false
     };
   },
   props: {
@@ -81,11 +86,16 @@ export default {
   methods: {
     addExpense(e) {
       e.preventDefault();
+      if (this.name.length === 0) {
+        this.hasError = true;
+        return;
+      }
       let newExpense = {
         name: this.name,
         date: this.date,
         value: this.value
       };
+      this.hasError = false;
       this.$http
         .post("funds", newExpense)
         .then(response => {
