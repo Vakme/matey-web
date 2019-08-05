@@ -8,13 +8,20 @@
       </div>
       <b-tabs v-model="activeTab" class="box">
         <b-tab-item :label="$t('archive.my_tab')">
-          <expense-array :funds="myArchive" :removable="false"></expense-array>
+          <div v-for="(chunk, i) in myArchive" :key="i">
+            <h2 class="subtitle">
+              {{ $d(new Date(chunk[0].date), "month") | capitalize }}
+            </h2>
+            <expense-array :funds="chunk" :removable="false"></expense-array>
+          </div>
         </b-tab-item>
         <b-tab-item :label="$t('archive.partner_tab')">
-          <expense-array
-            :funds="partnerArchive"
-            :removable="false"
-          ></expense-array>
+          <div v-for="(chunk, i) in partnerArchive" :key="i">
+            <h2 class="subtitle">
+              {{ $d(new Date(chunk[0].date), "month") | capitalize }}
+            </h2>
+            <expense-array :funds="chunk" :removable="false"></expense-array>
+          </div>
         </b-tab-item>
       </b-tabs>
     </div>
@@ -40,13 +47,33 @@ export default {
     this.getArchive();
   },
   methods: {
+    chunkArrayByMonth(arr) {
+      arr = arr.sort((a, b) => {
+        a = new Date(a.date);
+        b = new Date(b.date);
+        return a < b ? -1 : a > b ? 1 : 0;
+      });
+      let finalArr = [];
+      let month = 0,
+        newInd = 0;
+      for (let ind in arr) {
+        if (new Date(arr[ind].date).getMonth() !== month) {
+          finalArr.push(arr.slice(newInd, ind + 1));
+          newInd = ind + 1;
+          month = new Date(arr[ind].date).getMonth();
+        }
+      }
+      return finalArr;
+    },
     getArchive() {
       this.$http
         .get("archive")
         .then(response => {
           console.log(response.data);
-          this.myArchive = response.data.me.archive;
-          this.partnerArchive = response.data.partner.archive;
+          this.myArchive = this.chunkArrayByMonth(response.data.me.archive);
+          this.partnerArchive = this.chunkArrayByMonth(
+            response.data.partner.archive
+          );
         })
         .catch(() =>
           this.$toast.open({
@@ -54,6 +81,11 @@ export default {
             message: "ERROR: Try later"
           })
         );
+    }
+  },
+  filters: {
+    capitalize(val) {
+      return val.toString().toLocaleUpperCase();
     }
   }
 };

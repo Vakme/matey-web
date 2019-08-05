@@ -3,6 +3,46 @@ import VueI18n from "vue-i18n";
 
 Vue.use(VueI18n);
 
+const dateTimeFormats = {
+  en: {
+    short: {
+      year: "numeric",
+      month: "short",
+      day: "numeric"
+    },
+    long: {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      weekday: "short",
+      hour: "numeric",
+      minute: "numeric"
+    },
+    month: {
+      month: "long"
+    }
+  },
+  pl: {
+    short: {
+      year: "numeric",
+      month: "short",
+      day: "numeric"
+    },
+    long: {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      weekday: "short",
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true
+    },
+    month: {
+      month: "long"
+    }
+  }
+};
+
 function loadLocaleMessages() {
   const locales = require.context(
     "./locales",
@@ -30,5 +70,6 @@ function getNavigatorLanguage() {
 export default new VueI18n({
   locale: getNavigatorLanguage() || "en",
   fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || "en",
-  messages: loadLocaleMessages()
+  messages: loadLocaleMessages(),
+  dateTimeFormats: dateTimeFormats
 });
