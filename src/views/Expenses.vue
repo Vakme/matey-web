@@ -18,6 +18,7 @@
           <expense-array
             :funds="funds"
             :removable="true"
+            :showTypes="true"
             @delete="deleteExpense"
             @update="updateExpense"
           ></expense-array>
@@ -26,6 +27,7 @@
           <expense-array
             :funds="partnerFunds"
             :removable="false"
+            :showTypes="true"
           ></expense-array>
         </b-tab-item>
       </b-tabs>

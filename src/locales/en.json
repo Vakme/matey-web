@@ -22,7 +22,11 @@
     "amount": "Number of expenses",
     "my_tab": "My expenses",
     "partner_tab": "Partner's expenses",
-    "delete_dialog": "Are you sure you want to remove expense"
+    "delete_dialog": "Are you sure you want to remove expense",
+    "types": {
+      "common": "Common",
+      "personal": "Personal"
+    }
   },
   "archive": {
     "title": "Archive",
@@ -37,6 +41,7 @@
     "date_placeholder": "Click to choose",
     "value": "Value",
     "close": "Close",
+    "type": "Type",
     "submit": "Submit",
     "summary_title": "Summary",
     "return_to": "Return to"
