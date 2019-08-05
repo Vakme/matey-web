@@ -54,15 +54,16 @@ export default {
         return a < b ? -1 : a > b ? 1 : 0;
       });
       let finalArr = [];
-      let month = 0,
+      let month = new Date(arr[0].date).getMonth(),
         newInd = 0;
       for (let ind in arr) {
         if (new Date(arr[ind].date).getMonth() !== month) {
-          finalArr.push(arr.slice(newInd, ind + 1));
-          newInd = ind + 1;
+          finalArr.push(arr.slice(newInd, ind));
+          newInd = ind;
           month = new Date(arr[ind].date).getMonth();
         }
       }
+      finalArr.push(arr.slice(newInd, arr.length));
       return finalArr;
     },
     getArchive() {
