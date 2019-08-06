@@ -19,14 +19,26 @@
           >
           </b-input>
         </b-field>
+        <div class="level is-mobile">
+          <b-field :label="$t('expenses_modal.type')">
+            <b-select :placeholder="$t('expenses_modal.type')" v-model="type">
+              <option v-for="option in types" :value="option" :key="option">
+                {{ $t("expenses.types." + option) }}
+              </option>
+            </b-select>
+          </b-field>
 
-        <b-field :label="$t('expenses_modal.type')">
-          <b-select :placeholder="$t('expenses_modal.type')" v-model="type">
-            <option v-for="option in types" :value="option" :key="option">
-              {{ option }}
-            </option>
-          </b-select>
-        </b-field>
+          <b-field :label="$t('expenses_modal.subtype')">
+            <b-select
+              :placeholder="$t('expenses_modal.subtype')"
+              v-model="subtype"
+            >
+              <option v-for="option in subtypes" :value="option" :key="option">
+                {{ $t("expenses.subtypes." + option) }}
+              </option>
+            </b-select>
+          </b-field>
+        </div>
 
         <b-field :label="$t('expenses_modal.value')">
           <b-numberinput step="0.01" :value="value" v-model="value">
@@ -78,8 +90,10 @@ export default {
       date: new Date(),
       value: 0,
       error: "",
-      type: "personal",
-      types: ["common", "personal"],
+      type: "outcome",
+      types: ["income", "outcome"],
+      subtype: "personal",
+      subtypes: ["common", "personal"],
       hasError: false
     };
   },
@@ -91,6 +105,7 @@ export default {
       this.name = this.expense.name;
       this.date = this.expense.date;
       this.value = this.expense.value;
+      this.subtype = this.expense.subtype;
       this.type = this.expense.type;
     }
   },
@@ -105,6 +120,7 @@ export default {
         name: this.name,
         date: this.date,
         value: this.value,
+        subtype: this.subtype,
         type: this.type
       };
       this.hasError = false;
@@ -131,6 +147,7 @@ export default {
         name: this.name,
         date: this.date,
         value: this.value,
+        subtype: this.subtype,
         type: this.type
       };
       this.$http

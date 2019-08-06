@@ -23,9 +23,13 @@
     "my_tab": "Moje wydatki",
     "partner_tab": "Wydatki partnera",
     "delete_dialog": "Czy na pewno chcesz usunąć wydatek",
-    "types": {
+    "subtypes": {
       "common": "Wspólny",
       "personal": "Osobisty"
+    },
+    "types": {
+      "income": "Przychody",
+      "outcome": "Rozchody"
     }
   },
   "archive": {
@@ -42,6 +46,7 @@
     "value": "Wartość",
     "close": "Zamknij",
     "type": "Typ",
+    "subtype": "Podtyp",
     "submit": "Prześlij",
     "summary_title": "Podsumowanie",
     "return_to": "Zwróć do"

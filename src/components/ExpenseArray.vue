@@ -25,6 +25,14 @@
         </b-table-column>
 
         <b-table-column
+          v-if="showTypes"
+          field="subtype"
+          :label="$t('expenses_modal.subtype')"
+        >
+          {{ $t("expenses.subtypes." + props.row.subtype) }}
+        </b-table-column>
+
+        <b-table-column
           field="value"
           :label="$t('expenses_modal.value')"
           numeric
