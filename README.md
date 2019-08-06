@@ -37,9 +37,13 @@ yarn run test:e2e
 ## Project screenshots
 
 ### Expenses
+![expenses](https://raw.githubusercontent.com/Vakme/matey-web/images/expenses.png)
 
 ### Expense summary
+![summary](https://raw.githubusercontent.com/Vakme/matey-web/images/summary.png)
 
 ### Archive
+![archive](https://raw.githubusercontent.com/Vakme/matey-web/images/archive.png)
 
 ### Progress (uses Github API)
+![progress](https://raw.githubusercontent.com/Vakme/matey-web/images/progress.png)
