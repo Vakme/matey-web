@@ -33,3 +33,13 @@ yarn run test:unit
 ```
 yarn run test:e2e
 ```
+
+## Project screenshots
+
+### Expenses
+
+### Expense summary
+
+### Archive
+
+### Progress (uses Github API)
