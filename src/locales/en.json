@@ -23,9 +23,13 @@
     "my_tab": "My expenses",
     "partner_tab": "Partner's expenses",
     "delete_dialog": "Are you sure you want to remove expense",
-    "types": {
+    "subtypes": {
       "common": "Common",
       "personal": "Personal"
+    },
+    "types": {
+      "income": "Income",
+      "outcome": "Outcome"
     }
   },
   "archive": {
@@ -42,6 +46,7 @@
     "value": "Value",
     "close": "Close",
     "type": "Type",
+    "subtype": "Subtype",
     "submit": "Submit",
     "summary_title": "Summary",
     "return_to": "Return to"
