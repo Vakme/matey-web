@@ -50,12 +50,16 @@ export default {
   },
   methods: {
     getMilestones() {
-      this.githubInstance.get("/matey-api/milestones").then(response => {
-        this.backMilestones = response.data;
-      });
-      this.githubInstance.get("/matey-web/milestones").then(response => {
-        this.frontMilestones = response.data;
-      });
+      this.githubInstance
+        .get("/matey-api/milestones?state=all")
+        .then(response => {
+          this.backMilestones = response.data;
+        });
+      this.githubInstance
+        .get("/matey-web/milestones?state=all")
+        .then(response => {
+          this.frontMilestones = response.data;
+        });
     }
   }
 };
