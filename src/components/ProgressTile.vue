@@ -6,6 +6,12 @@
         <div class="level-left">
           <div class="level-item subtitle">
             {{ m.title }}
+            <b-icon
+              class="closed-icon"
+              v-if="m.state === 'closed'"
+              type="is-success"
+              icon="check-all"
+            ></b-icon>
           </div>
         </div>
         <div class="level-right">
@@ -63,5 +69,8 @@ export default {
 .tooltip {
   width: 100%;
   margin-bottom: 50px;
+}
+.closed-icon {
+  margin-left: 10px;
 }
 </style>
