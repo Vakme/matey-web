@@ -74,36 +74,20 @@ export default {
   },
   methods: {
     getExpenses() {
-      this.$http
-        .get("funds")
-        .then(response => {
-          console.log(response.data);
-          this.funds = response.data.me.funds;
-          this.partnerFunds = response.data.partner.funds;
-        })
-        .catch(() =>
-          this.$toast.open({
-            type: "is-danger",
-            message: "ERROR: Try later"
-          })
-        );
+      this.$http.get("funds").then(response => {
+        console.log(response.data);
+        this.funds = response.data.me.funds;
+        this.partnerFunds = response.data.partner.funds;
+      });
     },
     deleteExpense(id) {
-      this.$http
-        .delete("funds/" + id)
-        .then(() => {
-          this.getExpenses();
-          this.$toast.open({
-            type: "is-success",
-            message: "Expense removed"
-          });
-        })
-        .catch(() =>
-          this.$toast.open({
-            type: "is-danger",
-            message: "ERROR: Try later"
-          })
-        );
+      this.$http.delete("funds/" + id).then(() => {
+        this.getExpenses();
+        this.$toast.open({
+          type: "is-success",
+          message: "Expense removed"
+        });
+      });
     },
     onUpdatedFunds(newData) {
       console.log("UPDATED");

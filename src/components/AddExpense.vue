@@ -92,7 +92,7 @@ export default {
       error: "",
       type: "outcome",
       types: ["income", "outcome"],
-      subtype: "personal",
+      subtype: "common",
       subtypes: ["common", "personal"],
       hasError: false
     };
@@ -124,22 +124,14 @@ export default {
         type: this.type
       };
       this.hasError = false;
-      this.$http
-        .post("funds", newExpense)
-        .then(response => {
-          this.$emit("update", response.data);
-          this.$toast.open({
-            type: "is-success",
-            message: "Expense added"
-          });
-          this.$parent.close();
-        })
-        .catch(() =>
-          this.$toast.open({
-            type: "is-danger",
-            message: "ERROR: Try later"
-          })
-        );
+      this.$http.post("funds", newExpense).then(response => {
+        this.$emit("update", response.data);
+        this.$toast.open({
+          type: "is-success",
+          message: "Expense added"
+        });
+        this.$parent.close();
+      });
     },
     editExpense(e) {
       e.preventDefault();
@@ -150,22 +142,14 @@ export default {
         subtype: this.subtype,
         type: this.type
       };
-      this.$http
-        .put("funds/" + this.expense.id, newExpense)
-        .then(response => {
-          this.$emit("update", response.data);
-          this.$toast.open({
-            type: "is-success",
-            message: "Expense changed"
-          });
-          this.$parent.close();
-        })
-        .catch(() =>
-          this.$toast.open({
-            type: "is-danger",
-            message: "ERROR: Try later"
-          })
-        );
+      this.$http.put("funds/" + this.expense.id, newExpense).then(response => {
+        this.$emit("update", response.data);
+        this.$toast.open({
+          type: "is-success",
+          message: "Expense changed"
+        });
+        this.$parent.close();
+      });
     },
     closeModal() {
       this.expense = null;
