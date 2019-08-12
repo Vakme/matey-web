@@ -9,6 +9,7 @@ import Buefy from "buefy";
 import "buefy/dist/buefy.css";
 import i18n from "./i18n";
 import "@/assets/styles.scss";
+import Clipboard from "v-clipboard";
 
 const gauthOption = {
   clientId: process.env.VUE_APP_CLIENT_ID,
@@ -19,6 +20,7 @@ console.log(process.env.VUE_APP_CLIENT_ID);
 Vue.use(Buefy);
 Vue.use(GAuth, gauthOption);
 Vue.use(VueAxios, instance);
+Vue.use(Clipboard);
 Vue.config.productionTip = false;
 
 new Vue({

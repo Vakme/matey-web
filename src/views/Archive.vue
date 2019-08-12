@@ -48,6 +48,7 @@ export default {
   },
   methods: {
     chunkArrayByMonth(arr) {
+      if (arr.length === 0) return arr;
       arr = arr.sort((a, b) => {
         a = new Date(a.date);
         b = new Date(b.date);
@@ -67,21 +68,13 @@ export default {
       return finalArr;
     },
     getArchive() {
-      this.$http
-        .get("archive")
-        .then(response => {
-          console.log(response.data);
-          this.myArchive = this.chunkArrayByMonth(response.data.me.archive);
-          this.partnerArchive = this.chunkArrayByMonth(
-            response.data.partner.archive
-          );
-        })
-        .catch(() =>
-          this.$toast.open({
-            type: "is-danger",
-            message: "ERROR: Try later"
-          })
+      this.$http.get("archive").then(response => {
+        console.log(response.data);
+        this.myArchive = this.chunkArrayByMonth(response.data.me.archive);
+        this.partnerArchive = this.chunkArrayByMonth(
+          response.data.partner.archive
         );
+      });
     }
   },
   filters: {

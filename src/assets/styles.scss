@@ -1,6 +1,8 @@
 @import "~bulmaswatch/superhero/_variables.scss";
+$family-sans-serif: "Montserrat", sans-serif;
 @import "~bulma";
 @import "~bulmaswatch/superhero/_overrides.scss";
+
 
 .section {
   background-color: transparent;

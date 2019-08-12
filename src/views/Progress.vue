@@ -50,28 +50,12 @@ export default {
   },
   methods: {
     getMilestones() {
-      this.githubInstance
-        .get("/matey-api/milestones")
-        .then(response => {
-          this.backMilestones = response.data;
-        })
-        .catch(() =>
-          this.$toast.open({
-            type: "is-danger",
-            message: "ERROR: Try later"
-          })
-        );
-      this.githubInstance
-        .get("/matey-web/milestones")
-        .then(response => {
-          this.frontMilestones = response.data;
-        })
-        .catch(() =>
-          this.$toast.open({
-            type: "is-danger",
-            message: "ERROR: Try later"
-          })
-        );
+      this.githubInstance.get("/matey-api/milestones").then(response => {
+        this.backMilestones = response.data;
+      });
+      this.githubInstance.get("/matey-web/milestones").then(response => {
+        this.frontMilestones = response.data;
+      });
     }
   }
 };

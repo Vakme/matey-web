@@ -62,11 +62,6 @@ export default {
       errors: ""
     };
   },
-  computed: {
-    username() {
-      return this.$store.getters["auth/getUser"].getName();
-    }
-  },
   methods: {
     handleClickSignOut() {
       this.$store.dispatch("auth/logout").catch(() =>

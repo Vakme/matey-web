@@ -66,7 +66,14 @@
       <div class="level-item has-text-centered">
         <div>
           <p class="heading">{{ $t("expenses_modal.value") }}</p>
-          <p class="title">{{ parseNumber(calculateSum(funds)) }} zł</p>
+          <p class="title">
+            {{
+              parseNumber(
+                calculateSum(funds, "income") - calculateSum(funds, "outcome")
+              )
+            }}
+            zł
+          </p>
         </div>
       </div>
     </div>
@@ -97,10 +104,15 @@ export default {
     parseNumber(num) {
       return num.toLocaleString();
     },
-    calculateSum(arr) {
-      if (arr.length > 0)
-        return arr.map(elem => elem.value).reduce((a, b) => a + b);
-      else return 0;
+    calculateSum(arr, typeFilter) {
+      return arr
+        .map(elem => ({
+          ...elem,
+          type: typeof elem.type === "undefined" ? "outcome" : elem.type
+        }))
+        .filter(elem => elem.type === typeFilter)
+        .map(elem => elem.value)
+        .reduce((a, b) => a + b, 0);
     }
   }
 };

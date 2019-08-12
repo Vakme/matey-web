@@ -2,6 +2,7 @@ import Vue from "vue";
 import router from "../router";
 import api from "../api";
 import { UserMock } from "../mocks/UserMock";
+import { ToastProgrammatic as Toast } from "buefy";
 
 const LOGIN = "LOGIN";
 const LOGOUT = "LOGOUT";
@@ -18,7 +19,9 @@ const authModule = {
   mutations: {
     [LOGIN](state) {
       state.isSignIn = Vue.prototype.$gAuth.isAuthorized;
-      state.user = Vue.prototype.$gAuth.GoogleAuth.currentUser.get();
+      state.user = Vue.prototype.$gAuth.GoogleAuth.currentUser
+        .get()
+        .getBasicProfile();
       api.defaults.headers.common["Authorization"] =
         "Bearer " +
         Vue.prototype.$gAuth.GoogleAuth.currentUser.get().getAuthResponse()
@@ -58,7 +61,12 @@ const authModule = {
           commit(LOGIN);
           router.push("/");
         })
-        .catch(err => console.log(err));
+        .catch(err =>
+          Toast.open({
+            type: "is-danger",
+            message: "Error " + (err.message ? err.message : "")
+          })
+        );
     },
     logout({ commit }) {
       Vue.prototype.$gAuth
@@ -67,7 +75,12 @@ const authModule = {
           commit(LOGOUT);
           router.push("/login");
         })
-        .catch(err => console.log(err));
+        .catch(err =>
+          Toast.open({
+            type: "is-danger",
+            message: "Error " + (err.message ? err.message : "")
+          })
+        );
     },
     initializeAuth({ commit }) {
       let isInit;

@@ -44,31 +44,20 @@ export default {
       .get("summary")
       .then(response => (this.summary = response.data))
       .catch(() => {
-        this.$toast.open({
-          type: "is-danger",
-          message: "ERROR: Try later"
-        });
         this.$parent.close();
       });
   },
   methods: {
     moveToArchive() {
-      this.$http
-        .post("archive")
-        .then(() => {
-          this.$emit("update", { me: { funds: [] }, partner: { funds: [] } });
-          this.$toast.open({
-            type: "is-success",
-            message: "Moved successfully"
-          });
-          this.$router.push("archive");
-        })
-        .catch(() =>
-          this.$toast.open({
-            type: "is-danger",
-            message: "ERROR: Try later"
-          })
-        );
+      this.$clipboard(this.summary.diff.toLocaleString());
+      this.$http.post("archive").then(() => {
+        this.$emit("update", { me: { funds: [] }, partner: { funds: [] } });
+        this.$toast.open({
+          type: "is-success",
+          message: "Moved and copied successfully"
+        });
+        this.$router.push("archive");
+      });
     }
   }
 };
