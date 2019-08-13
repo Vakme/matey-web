@@ -52,7 +52,7 @@ export default {
       this.$clipboard(this.summary.diff.toLocaleString());
       this.$http.post("archive").then(() => {
         this.$emit("update", { me: { funds: [] }, partner: { funds: [] } });
-        this.$toast.open({
+        this.$buefy.toast.open({
           type: "is-success",
           message: "Moved and copied successfully"
         });
