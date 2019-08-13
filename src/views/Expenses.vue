@@ -83,7 +83,7 @@ export default {
     deleteExpense(id) {
       this.$http.delete("funds/" + id).then(() => {
         this.getExpenses();
-        this.$toast.open({
+        this.$buefy.toast.open({
           type: "is-success",
           message: "Expense removed"
         });

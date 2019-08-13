@@ -20,7 +20,7 @@ export default {
 
     if (!this.$store.getters["auth/getInitState"])
       this.$store.dispatch("auth/initializeAuth").catch(error =>
-        this.$toast.open({
+        this.$buefy.toast.open({
           type: "is-danger",
           message: error.message
         })

@@ -90,7 +90,7 @@ export default {
   },
   methods: {
     onClickDelete(row) {
-      this.$dialog.confirm({
+      this.$buefy.dialog.confirm({
         message: this.$t("expenses.delete_dialog") + " " + row.name + "?",
         onConfirm: () => this.$emit("delete", row.id)
       });

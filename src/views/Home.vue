@@ -65,7 +65,7 @@ export default {
   methods: {
     handleClickSignOut() {
       this.$store.dispatch("auth/logout").catch(() =>
-        this.$toast.open({
+        this.$buefy.toast.open({
           type: "is-danger",
           message: "ERROR: Try later"
         })

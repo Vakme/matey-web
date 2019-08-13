@@ -126,7 +126,7 @@ export default {
       this.hasError = false;
       this.$http.post("funds", newExpense).then(response => {
         this.$emit("update", response.data);
-        this.$toast.open({
+        this.$buefy.toast.open({
           type: "is-success",
           message: "Expense added"
         });
@@ -144,7 +144,7 @@ export default {
       };
       this.$http.put("funds/" + this.expense.id, newExpense).then(response => {
         this.$emit("update", response.data);
-        this.$toast.open({
+        this.$buefy.toast.open({
           type: "is-success",
           message: "Expense changed"
         });
