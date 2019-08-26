@@ -46,7 +46,10 @@
 <script>
 export default {
   name: "ProgressTile",
-  props: ["milestones", "title"],
+  props: {
+    milestones: Array,
+    title: String
+  },
   methods: {
     calculatePercentage(open, closed) {
       if (closed === 0) return 0.01;

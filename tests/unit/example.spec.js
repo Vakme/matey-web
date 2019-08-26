@@ -1,4 +1,4 @@
-import Home from "@/views/Home.vue";
+import Home from "@/views/HomeView.vue";
 
 describe("HelloWorld.vue", () => {
   it("sets the correct default data", () => {

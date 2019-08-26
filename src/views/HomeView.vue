@@ -48,7 +48,7 @@
 // @ is an alias to /src
 
 import AuthStateMixin from "../mixins/AuthStateMixin";
-import Summary from "../components/Summary";
+import Summary from "../components/ExpenseSummary";
 
 export default {
   name: "home",

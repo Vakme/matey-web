@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home.vue";
-import Login from "./views/Login.vue";
+import Home from "./views/HomeView.vue";
+import Login from "./views/LoginView.vue";
 import store from "./store/store";
 
 Vue.use(Router);
@@ -52,18 +52,18 @@ export default new Router({
       path: "/expenses",
       name: "expenses",
       beforeEnter: shouldBeAuthenticated,
-      component: () => import("./views/Expenses.vue")
+      component: () => import("./views/CurrentExpensesView.vue")
     },
     {
       path: "/archive",
       name: "archive",
       beforeEnter: shouldBeAuthenticated,
-      component: () => import("./views/Archive.vue")
+      component: () => import("./views/ArchiveView.vue")
     },
     {
       path: "/progress",
       name: "progress",
-      component: () => import("./views/Progress.vue")
+      component: () => import("./views/ProgressView.vue")
     }
   ]
 });
