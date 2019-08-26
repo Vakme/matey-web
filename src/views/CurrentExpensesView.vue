@@ -48,14 +48,14 @@
 </template>
 
 <script>
-import Summary from "@/components/Summary";
-import AddExpense from "@/components/AddExpense";
-import ExpenseArray from "../components/ExpenseArray";
+import ExpenseSummary from "@/components/ExpenseSummary";
+import ExpenseArray from "@/components/ExpenseArray";
+import ExpenseForm from "@/components/ExpenseForm";
 export default {
   name: "Expenses",
   components: {
-    "modal-summary": Summary,
-    "modal-add": AddExpense,
+    "modal-summary": ExpenseSummary,
+    "modal-add": ExpenseForm,
     "expense-array": ExpenseArray
   },
   data() {
