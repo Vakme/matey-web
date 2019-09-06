@@ -35,7 +35,10 @@
   "archive": {
     "title": "Archive",
     "my_tab": "My archive",
-    "partner_tab": "Partner's archive"
+    "partner_tab": "Partner's archive",
+    "show_chart": "Show chart",
+    "balance_chart": "Balance chart",
+    "y_axis": "Daily expenses [PLN]"
   },
   "expenses_modal": {
     "add_title": "Add expense",

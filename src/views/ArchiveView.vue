@@ -8,7 +8,7 @@
         <div class="level-right">
           <div class="level-item">
             <b-button type="is-success" @click="openModal()">
-              Show chart
+              {{ $t("archive.show_chart") }}
             </b-button>
           </div>
         </div>
@@ -33,7 +33,9 @@
       </b-tabs>
     </div>
     <b-modal :active.sync="isChartModalActive">
-      <h1 class="title view-title inverted-title">Balance chart</h1>
+      <h1 class="title view-title inverted-title">
+        {{ $t("archive.balance_chart") }}
+      </h1>
       <div class="card">
         <div class="card-content">
           <line-chart :chartData="chartData" />
@@ -104,7 +106,7 @@ export default {
         labels: labels,
         datasets: [
           {
-            label: "Income",
+            label: this.$t("expenses.types.income") + " [PLN]",
             borderColor: "rgb(92, 184, 92)",
             backgroundColor: "rgba(92, 184, 92, 0.1)",
             data: collArr.income.map(value => {
@@ -115,7 +117,7 @@ export default {
             })
           },
           {
-            label: "Outcome",
+            label: this.$t("expenses.types.outcome") + " [PLN]",
             borderColor: "rgb(217, 83, 79)",
             backgroundColor: "rgba(217, 83, 79, 0.1)",
             data: collArr.outcome.map(value => {

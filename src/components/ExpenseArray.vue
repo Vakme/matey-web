@@ -29,7 +29,12 @@
           field="subtype"
           :label="$t('expenses_modal.subtype')"
         >
-          {{ $t("expenses.subtypes." + props.row.subtype) }}
+          {{
+            $t(
+              "expenses.subtypes." +
+                (props.row.subtype ? props.row.subtype : "common")
+            )
+          }}
         </b-table-column>
 
         <b-table-column
