@@ -16,12 +16,12 @@
           {{ parseTimestamp(props.row.date) }}
         </b-table-column>
 
-        <b-table-column
-          v-if="showTypes"
-          field="type"
-          :label="$t('expenses_modal.type')"
-        >
-          {{ $t("expenses.types." + props.row.type) }}
+        <b-table-column field="type" :label="$t('expenses_modal.type')">
+          {{
+            $t(
+              "expenses.types." + (props.row.type ? props.row.type : "outcome")
+            )
+          }}
         </b-table-column>
 
         <b-table-column
