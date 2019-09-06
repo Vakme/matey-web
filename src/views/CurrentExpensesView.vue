@@ -75,7 +75,6 @@ export default {
   methods: {
     getExpenses() {
       this.$http.get("funds").then(response => {
-        console.log(response.data);
         this.funds = response.data.me.funds;
         this.partnerFunds = response.data.partner.funds;
       });
@@ -90,7 +89,6 @@ export default {
       });
     },
     onUpdatedFunds(newData) {
-      console.log("UPDATED");
       this.funds = newData.me.funds;
       this.partnerFunds = newData.partner.funds;
     },

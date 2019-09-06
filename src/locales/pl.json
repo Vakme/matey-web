@@ -35,7 +35,10 @@
   "archive": {
     "title": "Archiwum",
     "my_tab": "Moje archiwum",
-    "partner_tab": "Archiwum partnera"
+    "partner_tab": "Archiwum partnera",
+    "show_chart": "Pokaż wykres",
+    "balance_chart": "Wykres wydatków",
+    "y_axis": "Finanse dziennie [PLN]"
   },
   "expenses_modal": {
     "add_title": "Dodaj wydatek",

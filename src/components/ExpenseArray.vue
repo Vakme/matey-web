@@ -16,12 +16,12 @@
           {{ parseTimestamp(props.row.date) }}
         </b-table-column>
 
-        <b-table-column
-          v-if="showTypes"
-          field="type"
-          :label="$t('expenses_modal.type')"
-        >
-          {{ $t("expenses.types." + props.row.type) }}
+        <b-table-column field="type" :label="$t('expenses_modal.type')">
+          {{
+            $t(
+              "expenses.types." + (props.row.type ? props.row.type : "outcome")
+            )
+          }}
         </b-table-column>
 
         <b-table-column
@@ -29,7 +29,12 @@
           field="subtype"
           :label="$t('expenses_modal.subtype')"
         >
-          {{ $t("expenses.subtypes." + props.row.subtype) }}
+          {{
+            $t(
+              "expenses.subtypes." +
+                (props.row.subtype ? props.row.subtype : "common")
+            )
+          }}
         </b-table-column>
 
         <b-table-column
