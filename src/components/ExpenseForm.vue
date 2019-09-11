@@ -10,14 +10,24 @@
           :type="{ 'is-danger': hasError }"
           :message="{ 'Field cannot be empty': hasError }"
         >
-          <b-input
-            type="text"
-            :value="name"
+          <b-autocomplete
             v-model="name"
+            ref="autocomplete"
+            :data="names"
+            field="name"
+            :open-on-focus="true"
             :placeholder="$t('expenses_modal.name_placeholder')"
             required
           >
-          </b-input>
+            <template slot="footer">
+              <a @click="showAddType">
+                <span> {{ $t("expenses.expense_types.add_new") }} </span>
+              </a>
+            </template>
+            <template slot="empty">
+              > {{ $t("expenses.expense_types.no_results") + name }}</template
+            >
+          </b-autocomplete>
         </b-field>
         <div class="level is-mobile">
           <b-field :label="$t('expenses_modal.type')">
@@ -90,6 +100,7 @@ export default {
       date: new Date(),
       value: 0,
       error: "",
+      names: [],
       type: "outcome",
       types: ["income", "outcome"],
       subtype: "common",
@@ -108,8 +119,28 @@ export default {
       this.subtype = this.expense.subtype;
       this.type = this.expense.type;
     }
+    this.$http.get("types/").then(response => {
+      this.names = response.data;
+    });
   },
   methods: {
+    showAddType() {
+      this.$buefy.dialog.prompt({
+        message: `Expense type`,
+        inputAttrs: {
+          placeholder: "e.g. Shopping",
+          maxlength: 20,
+          value: this.name
+        },
+        confirmText: "Add",
+        onConfirm: value => {
+          this.$http.post("/types", { name: value }).then(response => {
+            this.names = response.data;
+            this.$refs.autocomplete.setSelected(value);
+          });
+        }
+      });
+    },
     addExpense(e) {
       e.preventDefault();
       if (this.name.length === 0) {
