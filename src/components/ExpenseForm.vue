@@ -18,6 +18,7 @@
             :open-on-focus="true"
             :placeholder="$t('expenses_modal.name_placeholder')"
             required
+            :class="'my-autocomplete'"
           >
             <template slot="footer">
               <a @click="showAddType">
@@ -193,8 +194,11 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .modal-card-foot {
   justify-content: space-between;
+}
+.my-autocomplete .dropdown-menu.is-opened-top {
+  height: 50px;
 }
 </style>
