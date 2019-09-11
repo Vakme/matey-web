@@ -15,7 +15,6 @@ const gauthOption = {
   clientId: process.env.VUE_APP_CLIENT_ID,
   scope: "profile email"
 };
-console.log(process.env.VUE_APP_CLIENT_ID);
 
 Vue.use(Buefy);
 Vue.use(GAuth, gauthOption);

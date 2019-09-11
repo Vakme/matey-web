@@ -7,7 +7,7 @@
   >
     <div class="navbar-brand">
       <router-link class="navbar-item" to="/">
-        <div class="title">EXPRESSO</div>
+        <div class="title">EKSPRESSO</div>
       </router-link>
       <a
         role="button"

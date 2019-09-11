@@ -9,7 +9,6 @@ handlers:
     static_files: dist/\1
     secure: always
     http_headers:
-      Content-Security-Policy: default-src https:; frame-ancestors 'none'
       Strict-Transport-Security: max-age=63072000
       X-Content-Type-Options: nosniff
       X-Frame-Options: DENY
@@ -19,7 +18,6 @@ handlers:
     static_files: dist/index.html
     secure: always
     http_headers:
-      Content-Security-Policy: default-src https:; frame-ancestors 'none'
       Strict-Transport-Security: max-age=63072000
       X-Content-Type-Options: nosniff
       X-Frame-Options: DENY
