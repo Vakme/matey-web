@@ -23,6 +23,10 @@
     "my_tab": "My expenses",
     "partner_tab": "Partner's expenses",
     "delete_dialog": "Are you sure you want to remove expense",
+    "expense_types": {
+      "add_new": "Add new...",
+      "no_results": "No results for "
+    },
     "subtypes": {
       "common": "Common",
       "personal": "Personal"

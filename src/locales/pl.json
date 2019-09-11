@@ -23,13 +23,17 @@
     "my_tab": "Moje wydatki",
     "partner_tab": "Wydatki partnera",
     "delete_dialog": "Czy na pewno chcesz usunąć wydatek",
+    "expense_types": {
+      "add_new": "Dodaj nowy...",
+      "no_results": "Brak wyników dla "
+    },
     "subtypes": {
       "common": "Wspólny",
       "personal": "Osobisty"
     },
     "types": {
-      "income": "Przychody",
-      "outcome": "Rozchody"
+      "income": "Uznania",
+      "outcome": "Obciążenia"
     }
   },
   "archive": {
