@@ -7,7 +7,10 @@
   >
     <div class="navbar-brand">
       <router-link class="navbar-item" to="/">
-        <div class="title">EKSPRESSO</div>
+        <h1 class="title">
+          EKSPRESSO
+          <b-tag type="is-danger" rounded>BETA</b-tag>
+        </h1>
       </router-link>
       <a
         role="button"
@@ -85,6 +88,7 @@
             <b-button
               type="is-success"
               @click="handleClickSignIn"
+              icon-right="google"
               :disabled="!isInit"
             >
               {{ $t("auth.signin") }}

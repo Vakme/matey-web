@@ -6,6 +6,15 @@
     "archive": "Archive",
     "progress": "Progress"
   },
+  "landing": {
+    "call": "Sign in with Google",
+    "description": "Expense management for couples",
+    "list": [
+      "Work out costs at any moment ",
+      "Incomes and outcomes balance",
+      "Expense archive"
+    ]
+  },
   "auth": {
     "signout": "Sign out",
     "signin": "Sign in"

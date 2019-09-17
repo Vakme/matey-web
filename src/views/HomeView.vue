@@ -4,7 +4,7 @@
       <div class="tile is-ancestor">
         <div class="tile is-4 is-vertical is-parent">
           <div class="tile is-child box">
-            <p class="title">{{ $t("home.greetings") }} {{ username }}!</p>
+            <p class="title">{{ $t("home.greetings") }}, {{ username }}!</p>
           </div>
           <div class="tile is-child box">
             <p class="subtitle">{{ $t("home.profile_tile") }} (TBD)</p>

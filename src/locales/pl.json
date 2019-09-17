@@ -6,6 +6,15 @@
     "archive": "Archiwum",
     "progress": "Postęp prac"
   },
+  "landing": {
+    "call": "Kontynuuj z Google",
+    "description": "Zarządzanie finansami dla par",
+    "list": [
+      "Rozliczanie się w dowolnym momencie",
+      "Bilans uznań i obciążeń",
+      "Archiwum rozliczonych wydatków"
+    ]
+  },
   "auth": {
     "signout": "Wyloguj",
     "signin": "Zaloguj"
