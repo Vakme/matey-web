@@ -7,8 +7,9 @@
   >
     <div class="navbar-brand">
       <router-link class="navbar-item" to="/">
-        <h1 class="title">EKSPRESSO
-            <b-tag type="is-danger" rounded>BETA</b-tag>
+        <h1 class="title">
+          EKSPRESSO
+          <b-tag type="is-danger" rounded>BETA</b-tag>
         </h1>
       </router-link>
       <a

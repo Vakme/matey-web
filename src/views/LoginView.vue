@@ -54,9 +54,6 @@ export default {
       errors: ""
     };
   },
-  mounted() {
-    console.log(this.$buefy);
-  },
   methods: {
     handleClickSignIn() {
       this.$store.dispatch("auth/login");
