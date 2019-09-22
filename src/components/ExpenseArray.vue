@@ -9,7 +9,25 @@
     >
       <template slot-scope="props">
         <b-table-column field="name" :label="$t('expenses_modal.name')">
-          {{ props.row.name }}
+          <span class="has-text-weight-bold">{{ props.row.name }}</span>
+        </b-table-column>
+
+        <b-table-column
+          field="description"
+          :label="$t('expenses_modal.description')"
+        >
+          <b-tooltip
+            :label="props.row.description"
+            type="is-dark"
+            v-if="props.row.description && props.row.description.length > 25"
+          >
+            <span class="is-size-7">
+              {{ props.row.description | trimDesc }}
+            </span>
+          </b-tooltip>
+          <span v-else class="is-size-7">
+            {{ props.row.description }}
+          </span>
         </b-table-column>
 
         <b-table-column field="date" :label="$t('expenses_modal.date')">
@@ -118,6 +136,13 @@ export default {
         .filter(elem => elem.type === typeFilter)
         .map(elem => elem.value)
         .reduce((a, b) => a + b, 0);
+    }
+  },
+  filters: {
+    trimDesc: function(value) {
+      if (!value) return "";
+      value = value.toString();
+      return value.substring(0, 22).concat("...");
     }
   }
 };

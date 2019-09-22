@@ -4,7 +4,7 @@
       <p class="modal-card-title">{{ $t("expenses_modal.summary_title") }}</p>
     </header>
     <section class="modal-card-body">
-      <div class="level is-mobile">
+      <div class="level">
         <div class="level-item has-text-centered">
           <div>
             <p class="heading">{{ $t("expenses_modal.return_to") }}</p>
