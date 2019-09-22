@@ -76,7 +76,7 @@
 // @ is an alias to /src
 
 import AuthStateMixin from "../mixins/AuthStateMixin";
-import PieChart from "../components/PieChart";
+import PieChart from "../components/charts/PieChart";
 
 export default {
   name: "home",
