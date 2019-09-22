@@ -5,31 +5,36 @@
         <p class="modal-card-title">{{ $t("expenses_modal.add_title") }}</p>
       </header>
       <section class="modal-card-body">
-        <b-field
-          :label="$t('expenses_modal.name')"
-          :type="{ 'is-danger': hasError }"
-          :message="{ 'Field cannot be empty': hasError }"
-        >
-          <b-autocomplete
-            v-model="name"
-            ref="autocomplete"
-            :data="names"
-            field="name"
-            :open-on-focus="true"
-            :placeholder="$t('expenses_modal.name_placeholder')"
-            required
-            :class="'my-autocomplete'"
+        <div class="level">
+          <b-field
+            :label="$t('expenses_modal.name')"
+            :type="{ 'is-danger': hasError }"
+            :message="{ 'Field cannot be empty': hasError }"
           >
-            <template slot="footer">
-              <a @click="showAddType">
-                <span> {{ $t("expenses.expense_types.add_new") }} </span>
-              </a>
-            </template>
-            <template slot="empty">
-              > {{ $t("expenses.expense_types.no_results") + name }}</template
+            <b-autocomplete
+              v-model="name"
+              ref="autocomplete"
+              :data="names"
+              field="name"
+              :open-on-focus="true"
+              :placeholder="$t('expenses_modal.name_placeholder')"
+              required
+              :class="'my-autocomplete'"
             >
-          </b-autocomplete>
-        </b-field>
+              <template slot="footer">
+                <a @click="showAddType">
+                  <span> {{ $t("expenses.expense_types.add_new") }} </span>
+                </a>
+              </template>
+              <template slot="empty">
+                > {{ $t("expenses.expense_types.no_results") + name }}</template
+              >
+            </b-autocomplete>
+          </b-field>
+          <b-field :label="$t('expenses_modal.description')">
+            <b-input maxlength="50" v-model="description"></b-input>
+          </b-field>
+        </div>
         <div class="level is-mobile">
           <b-field :label="$t('expenses_modal.type')">
             <b-select :placeholder="$t('expenses_modal.type')" v-model="type">
@@ -101,6 +106,7 @@ export default {
       date: new Date(),
       value: 0,
       error: "",
+      description: "",
       names: [],
       type: "outcome",
       types: ["income", "outcome"],
@@ -115,7 +121,8 @@ export default {
   mounted: function() {
     if (this.expense) {
       this.name = this.expense.name;
-      this.date = this.expense.date;
+      this.description = this.expense.description;
+      this.date = new Date(this.expense.date);
       this.value = this.expense.value;
       this.subtype = this.expense.subtype;
       this.type = this.expense.type;
@@ -151,6 +158,7 @@ export default {
       let newExpense = {
         name: this.name,
         date: this.date,
+        description: this.description,
         value: this.value,
         subtype: this.subtype,
         type: this.type
@@ -184,10 +192,10 @@ export default {
       });
     },
     closeModal() {
-      this.expense = null;
       this.name = "";
       this.date = new Date();
       this.value = 0;
+      this.description = "";
       this.$parent.close();
     }
   }
