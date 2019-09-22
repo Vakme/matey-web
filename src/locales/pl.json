@@ -22,7 +22,8 @@
   "home": {
     "greetings": "Cześć",
     "profile_tile": "Zobacz swój profil",
-    "expenses_tile": "Zobacz swoje wydatki"
+    "expenses_tile": "Zobacz swoje wydatki",
+    "current_state": "Aktualny stan"
   },
   "expenses": {
     "sumup_button": "Podsumuj",
