@@ -20,6 +20,10 @@ const dateTimeFormats = {
     },
     month: {
       month: "long"
+    },
+    month_year: {
+      year: "numeric",
+      month: "short"
     }
   },
   pl: {
@@ -38,6 +42,10 @@ const dateTimeFormats = {
       hour12: true
     },
     month: {
+      month: "long"
+    },
+    month_year: {
+      year: "numeric",
       month: "long"
     }
   }

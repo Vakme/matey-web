@@ -22,7 +22,8 @@
   "home": {
     "greetings": "Hello",
     "profile_tile": "Take a look at your profile",
-    "expenses_tile": "Take a look at your expenses"
+    "expenses_tile": "Take a look at your expenses",
+    "current_state": "Current state"
   },
   "expenses": {
     "sumup_button": "Sum up",
