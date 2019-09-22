@@ -177,6 +177,7 @@ export default {
       e.preventDefault();
       let newExpense = {
         name: this.name,
+        description: this.description,
         date: this.date,
         value: this.value,
         subtype: this.subtype,
