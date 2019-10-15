@@ -41,6 +41,10 @@
         <router-link class="navbar-item" to="/archive">
           {{ $t("menu.archive") }}
         </router-link>
+
+        <router-link class="navbar-item" to="/shoplist">
+          ShopList
+        </router-link>
       </div>
       <div class="navbar-end">
         <router-link class="navbar-item" to="/progress">
