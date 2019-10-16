@@ -3,12 +3,14 @@
     <div class="container">
       <div class="level">
         <div class="level-left">
-          <h1 class="title view-title">Shoplist</h1>
+          <h1 class="title view-title">
+            {{ $t("shoplist.title") }}
+          </h1>
         </div>
         <div class="level-right">
           <div class="level-item">
             <b-button type="is-success" @click="showAddShopListDialog()">
-              AddList
+              {{ $t("shoplist.add_list") }}
             </b-button>
           </div>
         </div>
@@ -18,6 +20,7 @@
         :key="list.id"
         :list="list"
         @delete="deleteShopList"
+        @deleteItem="deleteShopListItem"
         @addItem="addShopListItem"
       ></shoplist-collapse>
     </div>
@@ -48,9 +51,9 @@ export default {
     },
     showAddShopListDialog() {
       this.$buefy.dialog.prompt({
-        message: "Name of the shoplist?",
+        message: this.$t("shoplist.add_message"),
         inputAttrs: {
-          placeholder: "e.g. games",
+          placeholder: "Games",
           maxlength: 20
         },
         trapFocus: true,
@@ -81,6 +84,15 @@ export default {
         this.$buefy.toast.open({
           type: "is-success",
           message: "List removed"
+        });
+      });
+    },
+    deleteShopListItem(listId, itemId) {
+      this.$http.delete("shoplist/" + listId + "/items/" + itemId).then(() => {
+        this.getLists();
+        this.$buefy.toast.open({
+          type: "is-success",
+          message: "Item removed"
         });
       });
     }

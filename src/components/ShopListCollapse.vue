@@ -17,31 +17,49 @@
       </div>
       <div class="card-content">
         <div class="content">
-          {{ list }}
+          <shoplist-item
+            v-for="item in list.items"
+            :key="item.id"
+            :item="item"
+            :list="list.id"
+            @deleteItem="onClickDeleteItem"
+          ></shoplist-item>
         </div>
       </div>
       <footer class="card-footer">
-        <a class="card-footer-item" @click="onClickAddItem(list)">AddNewItem</a>
-        <a class="card-footer-item" @click="onClickDelete(list)">DeleteList</a>
+        <a class="card-footer-item" @click="onClickAddItem(list)">
+          {{ $t("shoplist.add_item") }}
+        </a>
+        <a class="card-footer-item" @click="onClickDelete(list)">
+          {{ $t("shoplist.delete_list") }}
+        </a>
       </footer>
     </b-collapse>
   </section>
 </template>
 
 <script>
+import ShopListItem from "./ShopListItem";
+
 export default {
   name: "ShopListCollapse",
   props: ["list"],
+  components: {
+    "shoplist-item": ShopListItem
+  },
   methods: {
     onClickDelete(list) {
       this.$buefy.dialog.confirm({
-        message: "Really delete list " + list.name + "?",
+        message: this.$t("shoplist.confirmation") + list.name + "?",
         onConfirm: () => this.$emit("delete", list.id)
       });
     },
+    onClickDeleteItem(itemId) {
+      this.$emit("deleteItem", this.list.id, itemId);
+    },
     onClickAddItem(list) {
       this.$buefy.dialog.prompt({
-        message: "Name of the shoplist item?",
+        message: this.$t("shoplist.add_item_message"),
         inputAttrs: {
           placeholder: "e.g. the sims",
           maxlength: 50

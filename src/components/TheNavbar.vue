@@ -43,7 +43,7 @@
         </router-link>
 
         <router-link class="navbar-item" to="/shoplist">
-          ShopList
+          {{ $t("menu.shoplist") }}
         </router-link>
       </div>
       <div class="navbar-end">

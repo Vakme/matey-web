@@ -4,7 +4,8 @@
     "expenses": "Expenses",
     "profile": "Profile",
     "archive": "Archive",
-    "progress": "Progress"
+    "progress": "Progress",
+    "shoplist": "Shop list"
   },
   "landing": {
     "call": "Sign in with Google",
@@ -73,5 +74,14 @@
     "details": "Details",
     "closed": "Closed",
     "issues": "issues"
+  },
+  "shoplist": {
+    "title": "Shop list",
+    "add_list": "Add new list",
+    "add_item": "Add new item",
+    "delete_list": "Delete list",
+    "confirmation": "Are you sure you want to delete ",
+    "add_message": "Name your new list:",
+    "add_item_message": "Name of the element:"
   }
 }
