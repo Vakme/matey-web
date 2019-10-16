@@ -61,6 +61,12 @@ export default new Router({
       component: () => import("./views/ArchiveView.vue")
     },
     {
+      path: "/shoplist",
+      name: "shoplist",
+      beforeEnter: shouldBeAuthenticated,
+      component: () => import("./views/ShopListView.vue")
+    },
+    {
       path: "/progress",
       name: "progress",
       component: () => import("./views/ProgressView.vue")

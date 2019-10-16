@@ -4,7 +4,8 @@
     "expenses": "Wydatki",
     "profile": "Profil użytkownika",
     "archive": "Archiwum",
-    "progress": "Postęp prac"
+    "progress": "Postęp prac",
+    "shoplist": "Lista zakupów"
   },
   "landing": {
     "call": "Kontynuuj z Google",
@@ -73,5 +74,14 @@
     "details": "Szczegóły",
     "closed": "Zamknięto",
     "issues": "zadań"
+  },
+  "shoplist": {
+    "title": "Lista zakupów",
+    "add_list": "Dodaj nową listę",
+    "add_item": "Dodaj nowy element",
+    "delete_list": "Usuń listę",
+    "confirmation": "Czy na pewno chcesz usunąć obiekt ",
+    "add_message": "Nazwij swoją listę:",
+    "add_item_message": "Nazwa elementu:"
   }
 }
