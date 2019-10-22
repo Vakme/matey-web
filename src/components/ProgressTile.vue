@@ -15,11 +15,9 @@
           </div>
         </div>
         <div class="level-right">
-          <a class="level-item" :href="m.html_url" target="_blank">
-            <b-button size="is-small" type="is-link" icon-left="github-circle">
-              {{ $t("progress.details") }}
-            </b-button>
-          </a>
+          <span class="level-item has-text-weight-bold is-size-7">
+            {{ calculatePercentage(m.open_issues, m.closed_issues) * 100 }}%
+          </span>
         </div>
       </div>
       <b-tooltip
@@ -53,7 +51,7 @@ export default {
   methods: {
     calculatePercentage(open, closed) {
       if (closed === 0) return 0.01;
-      return closed / (open + closed);
+      return (closed / (open + closed)).toFixed(2);
     },
     calculateSum(open, closed) {
       return open + closed;
