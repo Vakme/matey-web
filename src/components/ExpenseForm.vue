@@ -80,7 +80,7 @@
           class="button is-primary"
           type="submit"
           @click="editExpense"
-          v-if="expense"
+          v-if="edit"
         >
           {{ $t("expenses_modal.submit") }}
         </button>
@@ -116,14 +116,15 @@ export default {
     };
   },
   props: {
-    expense: Object
+    expense: Object,
+    edit: Boolean
   },
   mounted: function() {
     if (this.expense) {
       this.name = this.expense.name;
       this.description = this.expense.description;
       this.date = new Date(this.expense.date);
-      this.value = this.expense.value;
+      this.value = parseFloat(this.expense.value);
       this.subtype = this.expense.subtype;
       this.type = this.expense.type;
     }

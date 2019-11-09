@@ -30,6 +30,9 @@
         <a class="card-footer-item" @click="onClickAddItem(list)">
           {{ $t("shoplist.add_item") }}
         </a>
+        <a class="card-footer-item" @click="onClickSumUp(list)">
+          {{ $t("shoplist.sum_up") }}
+        </a>
         <a class="card-footer-item" @click="onClickDelete(list)">
           {{ $t("shoplist.delete_list") }}
         </a>
@@ -52,6 +55,21 @@ export default {
       this.$buefy.dialog.confirm({
         message: this.$t("shoplist.confirmation") + list.name + "?",
         onConfirm: () => this.$emit("delete", list.id)
+      });
+    },
+    onClickSumUp(list) {
+      this.$buefy.dialog.prompt({
+        message: `Price:`,
+        inputAttrs: {
+          step: "0.01",
+          type: "number",
+          placeholder: "Type amount",
+          value: "0",
+          maxlength: 7,
+          min: 0
+        },
+        trapFocus: true,
+        onConfirm: value => this.$emit("sumUp", value, list.id)
       });
     },
     onClickDeleteItem(itemId) {

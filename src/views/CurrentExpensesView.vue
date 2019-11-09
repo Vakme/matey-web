@@ -42,7 +42,7 @@
       <modal-summary></modal-summary>
     </b-modal>
     <b-modal :active.sync="addModal">
-      <modal-add @update="onUpdatedFunds" :expense="currentExpense"></modal-add>
+      <modal-add @update="onUpdatedFunds" :expense="currentExpense" :edit="editMode"></modal-add>
     </b-modal>
   </section>
 </template>
@@ -66,7 +66,8 @@ export default {
       addModal: false,
       error: "",
       activeTab: 0,
-      currentExpense: null
+      currentExpense: null,
+      editMode: false
     };
   },
   mounted() {
@@ -94,6 +95,7 @@ export default {
     },
     updateExpense(newData) {
       this.currentExpense = newData;
+      this.editMode = true;
       this.addModal = true;
     }
   }
