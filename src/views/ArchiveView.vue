@@ -38,7 +38,14 @@
       </h1>
       <div class="card">
         <div class="card-content">
-          <line-chart :chartData="chartData" />
+          <apexchart
+            ref="barChart"
+            type="bar"
+            width="100%"
+            height="100%"
+            :options="chartOptions"
+            :series="series"
+          />
         </div>
       </div>
     </b-modal>
@@ -47,13 +54,11 @@
 
 <script>
 import ExpenseArray from "../components/ExpenseArray";
-import LineChart from "../components/charts/LineChart";
 
 export default {
   name: "Archive",
   components: {
-    "expense-array": ExpenseArray,
-    "line-chart": LineChart
+    "expense-array": ExpenseArray
   },
   data() {
     return {
@@ -61,7 +66,68 @@ export default {
       myArchive: [],
       partnerArchive: [],
       activeTab: 0,
-      chartData: null
+      chartData: null,
+      series: [],
+      chartOptions: {
+        chart: {
+          toolbar: {
+            show: false
+          }
+        },
+        legend: {
+          showForSingleSeries: true,
+          labels: {
+            colors: ["#fff"],
+            useSeriesColors: true
+          }
+        },
+        tooltip: {
+          theme: "dark"
+        },
+        plotOptions: {
+          bar: {
+            dataLabels: {
+              enabled: true,
+              position: "bottom",
+              orientation: "vertical"
+            }
+          }
+        },
+        dataLabels: {
+          offsetY: 10,
+          formatter: function(val) {
+            return val.toFixed(2);
+          },
+          style: {
+            fontSize: "10px"
+          }
+        },
+        colors: ["#048a81", "#fc2f00", "#fff"],
+        xaxis: {
+          categories: [],
+          labels: {
+            style: {
+              colors: "#FFF"
+            }
+          }
+        },
+        yaxis: {
+          title: {
+            text: "[PLN]",
+            style: {
+              color: "#FFF"
+            }
+          },
+          labels: {
+            formatter: function(val) {
+              return val.toFixed(2);
+            },
+            style: {
+              color: "#FFF"
+            }
+          }
+        }
+      }
     };
   },
   mounted() {
@@ -69,70 +135,28 @@ export default {
   },
   methods: {
     openModal() {
-      const collection = this.myArchive
-        .flat()
-        .map(x => ({
-          date: new Date(x.date).toDateString(),
-          value: Number(x.value),
-          type: x.type
-        }))
-        .reduce(
-          (total, curr) => {
-            const key = curr.type ? curr.type : "outcome";
-            total[key][curr.date] =
-              total[key][curr.date] + curr.value || curr.value;
-            return total;
-          },
-          { income: {}, outcome: {} }
+      this.$http.get("summary/trendChart").then(response => {
+        const values = [];
+        for (let key of Object.keys(response.data.months)) {
+          values.push({
+            name: this.$t("expenses.types." + key),
+            type: "column",
+            data: response.data.months[key]
+          });
+        }
+        const categories = response.data.categories.map(c =>
+          this.$d(new Date(c.year, c.month), "month_year")
         );
-      const collArr = {
-        income: Object.keys(collection["income"]).map(function(key) {
-          return { date: key, value: collection["income"][key] };
-        }),
-        outcome: Object.keys(collection["outcome"]).map(function(key) {
-          return { date: key, value: collection["outcome"][key] };
-        })
-      };
-      const labels = Array.from(
-        new Set(
-          collArr["outcome"]
-            .map(x => this.$d(new Date(x.date), "short"))
-            .concat(
-              collArr["income"].map(x => this.$d(new Date(x.date), "short"))
-            )
-        )
-      ).sort(this.sortDates);
-      this.chartData = {
-        labels: labels,
-        datasets: [
-          {
-            label: this.$t("expenses.types.income") + " [PLN]",
-            borderColor: "rgb(92, 184, 92)",
-            backgroundColor: "rgba(92, 184, 92, 0.1)",
-            data: collArr.income.map(value => {
-              return {
-                x: this.$d(new Date(value.date), "short"),
-                y: value.value
-              };
-            })
-          },
-          {
-            label: this.$t("expenses.types.outcome") + " [PLN]",
-            borderColor: "rgb(217, 83, 79)",
-            backgroundColor: "rgba(217, 83, 79, 0.1)",
-            data: collArr.outcome.map(value => {
-              return {
-                x: this.$d(new Date(value.date), "short"),
-                y: value.value
-              };
-            })
+        this.series = values;
+        this.chartOptions = {
+          ...this.chartOptions,
+          xaxis: {
+            ...this.chartOptions.xaxis,
+            categories
           }
-        ]
-      };
+        };
+      });
       this.isChartModalActive = true;
-    },
-    getRandomInt() {
-      return Math.floor(Math.random() * (50 - 5 + 1)) + 5;
     },
     sortDates(a, b) {
       a = new Date(a.date);
@@ -175,5 +199,8 @@ export default {
 <style scoped>
 .inverted-title {
   color: white;
+}
+.card-content {
+  height: 80vh;
 }
 </style>

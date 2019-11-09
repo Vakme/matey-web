@@ -10,16 +10,18 @@ import "buefy/dist/buefy.css";
 import i18n from "./i18n";
 import "@/assets/styles.scss";
 import Clipboard from "v-clipboard";
+import VueApexCharts from "vue-apexcharts";
 
 const gauthOption = {
   clientId: process.env.VUE_APP_CLIENT_ID,
   scope: "profile email"
 };
-
 Vue.use(Buefy);
 Vue.use(GAuth, gauthOption);
 Vue.use(VueAxios, instance);
 Vue.use(Clipboard);
+Vue.use(VueApexCharts);
+Vue.component("apexchart", VueApexCharts);
 Vue.config.productionTip = false;
 
 new Vue({
