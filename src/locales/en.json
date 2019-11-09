@@ -79,6 +79,7 @@
     "title": "Shop list",
     "add_list": "Add new list",
     "add_item": "Add new item",
+    "sum_up": "Sum up shopping",
     "delete_list": "Delete list",
     "confirmation": "Are you sure you want to delete ",
     "add_message": "Name your new list:",
