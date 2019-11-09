@@ -22,15 +22,15 @@
             <div class="has-text-centered">
               <div>
                 <p class="heading">{{ $t("expenses_modal.return_to") }}</p>
-                <p class="subtitle">{{ funds.summary.creditor }}</p>
+                <p class="subtitle">
+                  {{ funds.creditor }}
+                </p>
               </div>
             </div>
             <div class="has-text-centered">
               <div>
                 <p class="heading">{{ $t("expenses_modal.value") }}</p>
-                <p class="subtitle">
-                  {{ funds.summary.diff.toLocaleString() }} zł
-                </p>
+                <p class="subtitle">{{ funds.diff.toLocaleString() }} zł</p>
               </div>
             </div>
           </div>
@@ -47,7 +47,7 @@
           </div>
         </div>
         <div class="tile is-parent">
-          <div class="tile is-child box">
+          <div class="tile is-child box is-centered">
             <b-select
               placeholder="Select a date"
               v-model="selectedDate"
@@ -64,7 +64,13 @@
                 {{ $d(new Date(option.year, option.month), "month_year") }}
               </option>
             </b-select>
-            <pie-chart :chartData="chartData" />
+            <apexchart
+              ref="pieChart"
+              type="donut"
+              width="90%"
+              :options="chartOptions"
+              :series="series"
+            />
           </div>
         </div>
       </div>
@@ -73,111 +79,98 @@
 </template>
 
 <script>
-// @ is an alias to /src
-
 import AuthStateMixin from "../mixins/AuthStateMixin";
-import PieChart from "../components/charts/PieChart";
 
 export default {
   name: "home",
-  components: {
-    "pie-chart": PieChart
-  },
   mixins: [AuthStateMixin],
   data() {
     return {
       errors: "",
       funds: null,
-      chartData: null,
-      labels: null,
-      dates: null,
-      selectedDate: "all"
+      dates: [],
+      selectedDate: "all",
+      series: [],
+      chartOptions: {
+        plotOptions: {
+          pie: {
+            donut: {
+              labels: {
+                show: true,
+                name: {
+                  show: true,
+                  color: "#FFF"
+                },
+                value: {
+                  show: true,
+                  color: "#FFF",
+                  formatter: function(value) {
+                    return value + " zł";
+                  }
+                }
+              }
+            }
+          }
+        },
+        colors: [
+          "#c200fb",
+          "#ec0868",
+          "#fc2f00",
+          "#ec7d10",
+          "#ffbc0a",
+          "#048a81",
+          "#06d6a0",
+          "#54c6eb",
+          "#8a89c0",
+          "#cda2ab"
+        ],
+        legend: {
+          showForSingleSeries: true,
+          labels: {
+            colors: ["#fff"],
+            useSeriesColors: true
+          }
+        },
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 200
+              },
+              legend: {
+                position: "bottom"
+              }
+            }
+          }
+        ]
+      }
     };
   },
   mounted() {
-    this.getChartData();
+    this.renderChart();
   },
   methods: {
-    getChartData() {
-      this.$http.get("summary/chart").then(response => {
-        this.funds = response.data;
-        this.prepareChart();
-      });
-    },
-    prepareChart() {
-      this.labels = Array.from(
-        new Set(
-          this.funds["incomes"]
-            .map(x => x.name)
-            .concat(this.funds["outcomes"].map(x => x.name))
-        )
-      );
-      this.dates = this.funds["incomes"]
-        .map(x => {
-          return {
-            year: x.year,
-            month: x.month
-          };
-        })
-        .concat(
-          this.funds["outcomes"].map(x => {
-            return {
-              year: x.year,
-              month: x.month
-            };
-          })
-        )
-        .filter((el, index, arr) => {
-          return (
-            index ===
-            arr.findIndex(obj => {
-              return JSON.stringify(obj) === JSON.stringify(el);
-            })
-          );
-        })
-        .sort(this.sortDates);
-      this.renderChart(this.selectedDate);
-    },
     sortDates(a, b) {
       a = new Date(a.year, a.month);
       b = new Date(b.year, b.month);
       return a < b ? -1 : a > b ? 1 : 0;
     },
-    renderChart(value) {
-      let currMonth = this.funds.outcomes.concat(this.funds.incomes);
-      let label = value;
+    renderChart() {
+      const value = this.selectedDate;
+      let queryString = "";
       if (value !== "all") {
-        currMonth = currMonth.filter(
-          x => x.year === value.year && x.month === value.month
-        );
-        label = this.$d(new Date(value.year, value.month), "month_year");
+        queryString = `?year=${value.year}&month=${value.month}`;
       }
-      const currData = [];
-      for (const label of this.labels) {
-        if (value === "all") {
-          currData.push(
-            currMonth
-              .filter(x => x.name === label)
-              .map(x => x.value)
-              .reduce((p, n) => p + n)
-          );
-        } else {
-          currData.push(
-            currMonth.findIndex(x => x.name === label) < 0
-              ? 0
-              : currMonth.find(x => x.name === label).value
-          );
-        }
-      }
-      this.chartData = {
-        labels: this.labels,
-        datasets: [
-          {
-            label: label,
-            data: currData
-          }
-        ]
-      };
+      this.$http.get("summary/chart" + queryString).then(response => {
+        this.funds = response.data.summary;
+        this.dates = response.data.dates.sort(this.sortDates);
+        this.series = response.data.values;
+        this.chartOptions = {
+          ...this.chartOptions,
+          labels: response.data.labels
+        };
+      });
     },
     handleClickSignOut() {
       this.$store.dispatch("auth/logout").catch(() =>
