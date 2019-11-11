@@ -94,8 +94,8 @@ export default {
       this.partnerFunds = newData.partner.funds;
     },
     updateExpense(newData) {
+      if (newData) this.editMode = true;
       this.currentExpense = newData;
-      this.editMode = true;
       this.addModal = true;
     }
   }

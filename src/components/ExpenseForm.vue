@@ -120,7 +120,7 @@ export default {
     edit: Boolean
   },
   mounted: function() {
-    if (this.expense) {
+    if (this.edit) {
       this.name = this.expense.name;
       this.description = this.expense.description;
       this.date = new Date(this.expense.date);
