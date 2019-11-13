@@ -65,9 +65,9 @@
               </option>
             </b-select>
             <apexchart
+              class="chart"
               ref="pieChart"
               type="donut"
-              width="90%"
               :options="chartOptions"
               :series="series"
             />
@@ -92,6 +92,9 @@ export default {
       selectedDate: "all",
       series: [],
       chartOptions: {
+        chart: {
+          width: "90%"
+        },
         plotOptions: {
           pie: {
             donut: {
@@ -105,7 +108,7 @@ export default {
                   show: true,
                   color: "#FFF",
                   formatter: function(value) {
-                    return value + " zł";
+                    return parseFloat(value).toFixed(2) + " zł";
                   }
                 }
               }
@@ -124,6 +127,13 @@ export default {
           "#8a89c0",
           "#cda2ab"
         ],
+        tooltip: {
+          y: {
+            formatter: function(value) {
+              return parseFloat(value).toFixed(2) + " zł";
+            }
+          }
+        },
         legend: {
           showForSingleSeries: true,
           labels: {
@@ -135,8 +145,16 @@ export default {
           {
             breakpoint: 480,
             options: {
-              chart: {
-                width: 200
+              plotOptions: {
+                pie: {
+                  size: 100,
+                  offsetY: 70,
+                  donut: {
+                    labels: {
+                      show: false
+                    }
+                  }
+                }
               },
               legend: {
                 position: "bottom"
